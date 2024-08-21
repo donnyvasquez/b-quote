@@ -1,0 +1,60 @@
+ion-button{
+  margin:0px;
+}
+.btns-group{
+  width: max-content;
+  display: none;
+
+  ion-button{
+    --background: #fff;
+    --background-hover: #eee;
+    --background-activated: #dbf0ff;
+    --background-focused: #dbf0ff;
+    --color: var(--ion-color-primary);
+    margin: 0!important;
+    &:focus, &:hover{
+      --box-shadow: 0px 0px 0px 4px var(--bs-focus-ring-color);
+    }
+  }
+}
+.app-button-actions--options {
+  transition: all 0.2s ease-in;
+  ion-button {
+    transition: all 0.2s ease-in;
+    transform: translateY(0);
+    ion-icon {
+      margin-inline-start: 0.5rem;
+    }
+  }
+
+  &.movedown {
+    ion-button {
+      transform: translateY(3px);
+    }
+  }
+}
+
+ion-backdrop {
+  opacity: 0.5;
+  background: var(--ion-color-medium-tint);
+  position: fixed;
+}
+
+.btn-group{
+  &.separate-active{
+    ion-button:last-child{
+      --border-color:var(--body);
+      --border-width: 0 0 0 0.5px;
+      --border-style: solid;
+    }
+  }
+  ion-button{
+    margin: 0;
+    &:first-child{
+      --border-radius: 5px 0 0 5px;
+    }
+    &:last-child{
+      --border-radius: 0 5px 5px 0;
+    }
+  }
+}

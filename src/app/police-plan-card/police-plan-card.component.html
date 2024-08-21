@@ -1,0 +1,99 @@
+<ion-card mode="ios" class="ion-no-margin police-plan-card-{{planId}}">
+  <ion-card-header  mode="ios">
+      <ion-row class="ion-justify-content-between">
+        <ion-col><ion-card-title *ngIf="planTitle" mode="ios"><span [innerHtml]="planTitle"></span></ion-card-title></ion-col>
+        <ion-col size="auto" class="text-end ion-no-padding"><ion-checkbox mode="md" ></ion-checkbox></ion-col>
+      </ion-row>
+      <ion-card-subtitle hidden mode="ios">{{ planSubtitle }}</ion-card-subtitle>
+    <hr *ngIf="planTitle" >
+  </ion-card-header>
+
+  <ion-card-content  mode="ios">
+    <div *ngIf="planMountLimit || planCoverage" class="plan-mount plan-coverage">
+      <p *ngIf="planMountLimit">{{planMountLimit}}</p>
+      <p *ngIf="planCoverage">{{planCoverage}}</p>
+      <hr>
+    </div>
+    <div class="plan-deductible-mount" *ngIf="deductibleMount.length>0">
+      <ion-label class="d-block">Deducibles: {{deductibleMount.length}} <ion-icon color="primary" name="information-circle-outline"></ion-icon></ion-label>
+      <div *ngFor="let mount of deductibleMount">
+        <p class="ion-no-margin">{{ mount }}</p>
+      </div>
+      <div class="more-plan-deductible-options">
+        <ion-button id="open-more-plan-deductible-options-modal-{{planId}}" class="ion-no-margin ion-no-padding" fill="clear">
+          Otras opciones de deducible <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+
+        <ion-modal
+          #modal
+          trigger="open-more-plan-deductible-options-modal-{{planId}}"
+          [canDismiss]="canDismiss"
+        >
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title slot="start">{{planTitle|stripHtml}}</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="modal.dismiss()"><ion-icon name="close-outline"></ion-icon></ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-card mode="ios" class="ion-no-margin">
+              <ion-list>
+                <ion-item>
+                  <ion-label>Plan 1: <br>
+                    Dentro del País: US$ 1,000 <br>
+                    Fuera del País: US$ 2,000
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Plan 2: <br>
+                    Dentro del País: US$ 1,000 <br>
+                    Fuera del País: US$ 2,000
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Plan 3: <br>
+                    Dentro del País: US$ 1,000 <br>
+                    Fuera del País: US$ 2,000
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Plan 4: <br>
+                    Dentro del País: US$ 1,000 <br>
+                    Fuera del País: US$ 2,000
+                  </ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Plan 5: <br>
+                    Dentro del País: US$ 1,000 <br>
+                    Fuera del País: US$ 2,000
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card>
+          </ng-template>
+        </ion-modal>
+
+      </div>
+      <hr>
+    </div>
+    <div class="aditional-coverage-options" *ngIf="aditionalCoverageOptions.length>0">
+      <p class="ion-margin-bottom">Este producto ofrece opciones de cobertura adicionales.</p>
+      <ion-list>
+        <ion-item *ngFor="let option of aditionalCoverageOptions" (click)="toggleCheckbox($event, checkbox)">
+          <ion-checkbox (ionCheck)="checkbox.checked" #checkbox mode="md" slot="start" color="primary"></ion-checkbox>
+          <ion-icon [name]="option.icon" slot="start"></ion-icon>
+          <span>{{ option.label }}</span>
+        </ion-item>
+      </ion-list>
+      <hr>
+    </div>
+    <p>{{ planDescription }}</p>
+    <p><strong>Price:</strong> {{ planPrice | currency }}</p>
+  </ion-card-content>
+
+  <ion-button  mode="ios" color="primary" (click)="selectPlan()">
+    Seleccionar Plan
+  </ion-button>
+</ion-card>

@@ -35,3 +35,16 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+@import 'node_modules/bootstrap/scss/bootstrap';
+:host{
+  --ion-color-primary: #0079C8;
+}
+html{
+  font-size: 14px;
+}
+body{
+  font-size: 1rem;
+}
+ion-button:not(.btn-toogle){
+  --border-radius: 5px;
+}
