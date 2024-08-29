@@ -1,6 +1,11 @@
 ion-button{
   margin:0px;
 }
+.app-button-actions--wrapper{
+  position:relative;
+  display:inline-block;
+}
+
 .btns-group{
   width: max-content;
   display: none;
@@ -32,12 +37,6 @@ ion-button{
       transform: translateY(3px);
     }
   }
-}
-
-ion-backdrop {
-  opacity: 0.5;
-  background: var(--ion-color-medium-tint);
-  position: fixed;
 }
 
 .btn-group{

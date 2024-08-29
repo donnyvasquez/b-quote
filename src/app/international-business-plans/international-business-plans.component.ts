@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
 import { PolicePlanCardComponent } from '../police-plan-card/police-plan-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
-import { InternationalBusinessQuoteComponent } from '../international-business-quote/international-business-quote.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-international-business-plans',
+  templateUrl: './international-business-plans.component.html',
+  styleUrls: ['./international-business-plans.component.scss'],
   standalone: true,
-  imports: [RouterModule,ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule],
+  imports: [ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule],
 })
-export class HomePage implements OnInit {
+export class InternationalBusinessPlansComponent  implements OnInit {
 
   public selectedCount: number = 0;
   public plans = [
@@ -92,4 +90,5 @@ export class HomePage implements OnInit {
     }
     console.log('Planes seleccionados '+this.selectedCount);
   }
+
 }

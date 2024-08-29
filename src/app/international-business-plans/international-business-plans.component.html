@@ -1,0 +1,65 @@
+<ion-content id="main-content" class="main-content-plans">
+  <ion-grid fixed="true">
+
+    <ion-toolbar class="plans-toolbar">
+      <!-- Botón de volver alineado a la izquierda -->
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+
+      <!-- Título centrado -->
+      <ion-title>Cotización de seguro médico internacional</ion-title>
+    </ion-toolbar>
+    <section class="ion-text-center ion-flex-column ion-margin-bottom ion-display-flex ion-align-items-center plans-header--section" >
+      <ion-row>
+        <ion-col size="12">
+        <h3>Cotización de seguro médico internacional</h3>
+          <p>Precio total para todos los asegurados</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="auto" class="ion-align-self-center">
+          <ion-label class="ion-text-end">Forma de pago:</ion-label>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-select mode="md" placeholder="Forma de pago" #paymentWay fill="outline">
+            <ion-select-option [value]="'yearly'">Anual</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </section>
+    <ion-row>
+      <ion-col *ngFor="let plan of plans" size="12" sizeMd="4">
+        <app-police-plan-card
+          [planId]="plan.planId"
+          [planTitle]="plan.planTitle"
+          [planSubtitle]="plan.planSubtitle"
+          [planDescription]="plan.planDescription"
+          [planPrice]="plan.planPrice"
+          [planMountLimit]="plan.planMountLimit"
+          [planCoverage]="plan.planCoverage"
+          [planPaymentPlan]="plan.planPaymentPlan"
+          [deductibleMount]="plan.deductibleMount"
+          [promoPercents]="plan.promoPercents"
+          [promoPlanPaymentPlan]="plan.promoPlanPaymentPlan"
+          [validDate]="plan.validDate"
+          [promoPlanPrice]="plan.promoPlanPrice"
+          [aditionalCoverageOptions]="plan.aditionalCoverageOptions"
+          (planSelected)="onPlanSelected($event)">
+        </app-police-plan-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer mode="ios" translucent="false" *ngIf="selectedCount > 0">
+  <ion-toolbar class="ion-text-center plan-ion-toolbar">
+    <ion-button
+      mode="ios"
+      [color]="selectedCount <= 1 ? 'medium' : 'primary'"
+      class="full-width auto-width-md"
+      [disabled]="selectedCount <= 1"
+    > <ion-icon name="git-compare-outline" class="ion-margin-end"></ion-icon>
+      {{ selectedCount <= 1 ? ' Seleccione dos o más planes para comparar' : ' Comparar los ' + selectedCount + ' planes seleccionados' }}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

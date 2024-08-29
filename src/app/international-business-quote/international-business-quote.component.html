@@ -1,0 +1,100 @@
+<ion-header mode="ios" *ngIf="1 > 0">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      International business quote
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <h1 class="police-quote-title">International business quote</h1>
+    <h2 class="calculate-insurance-price-subtitle">Calculate your insurance price</h2>
+    <ion-row class="police-quote-filter">
+      <ion-col size="12" [sizeMd]="6" sizeLg="3">
+        <ion-select (ionChange)="onWhoToInsureChange($event)" mode="md" value="individual" #whoToInsureSelect label="¿A quién quieres asegurar?" label-placement="floating" fill="outline">
+          <ion-select-option *ngFor="let option of whoToInsureOptions" [value]="option.value">{{ option.label }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col size="12" [sizeMd]="6" sizeLg="3">
+        <ion-select  mode="md" #countrySelect label="Selecciona el país" label-placement="floating" fill="outline">
+          <ion-select-option *ngFor="let option of countryOptions" [value]="option.value">{{ option.label }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col size="12" [sizeMd]="6" sizeLg="3">
+        <ion-select  mode="md" #productTypeSelect label="Selecciona el tipo de producto {{this.updateProductOptions|json}}" (ionChange)="onProductTypeChange($event)" label-placement="floating" fill="outline">
+          <ion-select-option *ngFor="let option of productTypeOptions" [value]="option.value">{{ option.label }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col *ngIf="shouldShowProductSelect()" size="12" [sizeMd]="6" sizeLg="3">
+        <ion-select  mode="md" #productSelect label="Selecciona el producto" label-placement="floating" fill="outline" [disabled]="availableProducts.length === 0">
+          <ion-select-option *ngFor="let product of availableProducts" [value]="product.value">{{ product.label }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <h2 class="ion-text-center user-data-title">Datos del asegurado</h2>
+    <section class="ion-justify-content-center">
+      <ion-row class="ion-justify-content-center ion-nowrap ">
+        <ion-col>
+          <swiper-container #swiper [centeredSlides]="true" [effect]="slideConfig.effect" [slidesPerView]="slideConfig.slidesPerView" [spaceBetween]="slideConfig.spaceBetween" [loop]="slideConfig.loop">
+            <swiper-slide *ngFor="let persona of insured; let i = index" class="user-data-swiper-slide" [ngClass]="{'user-data-swiper-slide-titular': i===0}">
+              <ion-card mode="ios" color="primary" class="user-data-swiper-card ion-no-margin">
+                <ion-card-header class="user-data-swiper-card-header">
+                  <ion-card-title><div class="ion-display-flex ion-justify-content-start ion-align-items-center"><ion-badge mode="ios" color="light">{{i+1}}</ion-badge> <span class="ion-padding-horizontal">{{ persona }}</span></div></ion-card-title>
+                  <ion-button *ngIf="i > 1" color="light" fill="clear" (click)="removeSlide(i)" class="user-data-swiper-card-header-close-button"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
+                </ion-card-header>
+                <ion-card-content class="ion-padding-top">
+                  <ion-row>
+                    <ion-col size="12"><ion-label size="12">Fecha de nacimiento</ion-label></ion-col>
+                    <ion-col size="4">
+                      <ion-input labelPlacement="stacked" label="DD" type="text"></ion-input>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-input labelPlacement="stacked" label="MM" type="text"></ion-input>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-input labelPlacement="stacked" label="AAAA" type="text"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row *ngIf="i > 0">
+                    <ion-col size="12"><ion-label size="12">Parentezco</ion-label></ion-col>
+                    <ion-col size="12">
+                      <ion-select mode="md" #relationshipSelect aria-label="Select Relationship" label-placement="stacked" fill="outline" value="child">
+                        <ion-select-option *ngFor="let option of relationshipOptions" [value]="option.value">{{ option.label }}</ion-select-option>
+                      </ion-select>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </swiper-slide>
+          </swiper-container>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-end">
+        <ion-col size="auto" *ngIf="showAddSlideButton" class="ion-no-padding ion-text-center ion-display-inline-flex ion-flex-column">
+
+          <ion-button (click)="addSlide()" mode="ios" shape="round" class="round-button ion-padding">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+          <ion-label color="secondary">Añadir <br> asegurado</ion-label>
+
+        </ion-col>
+      </ion-row>
+    </section>
+  </ion-grid>
+</ion-content>
+<ion-footer class="ion-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-button [disabled]="(this.insured.length < 2 && this.showAddSlideButton)" [color]="(this.insured.length < 2 && this.showAddSlideButton) ? 'medium' : 'primary'" mode="ios" (click)="navigateToPlans()">
+        {{ (this.insured.length < 2 && this.showAddSlideButton) ? 'Debe llenar otra tarjeta para calcular' : 'Calcular precio' }}
+      </ion-button>
+    </ion-row>
+</ion-footer>

@@ -35,9 +35,41 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
-@import 'node_modules/bootstrap/scss/bootstrap';
 :host{
   --ion-color-primary: #0079C8;
+  --san-color-primary: #0079C8;
+  --san-secondary-25: #0652AE;
+  --san-grey-175: #4E5357;
+}
+$primary : --ion-color-primary;
+*::-webkit-scrollbar {
+  width: auto;
+}
+*::-webkit-scrollbar-thumb {
+  background: $primary;
+}
+.ion-background-primary{
+  background-color: var(--ion-color-primary);
+  color: white;
+}
+.ion-background-secondary{
+  background-color: var(--ion-color-secondary);
+  color: white;
+}
+.san-color-primary{
+  color: var(--san-color-primary);
+  --color: var(--san-color-primary);
+}
+.san-color-secondary-25{
+  color: var(--san-secondary-25);
+  --color: var(--san-secondary-25);
+}
+.san-grey-175{
+  color: var(--san-grey-175);
+  --color: var(--san-grey-175);
+}
+.ion-text-underline{
+  text-decoration: underline;
 }
 html{
   font-size: 14px;
@@ -45,6 +77,94 @@ html{
 body{
   font-size: 1rem;
 }
+hr{
+  background: var(--ion-color-light-shade);
+}
+ion-backdrop {
+  background: var(--ion-color-dark);
+  opacity: 0.3;
+}
+
+ion-modal::part(backdrop) {
+  --backdrop-opacity: 0.3;
+  --backdrop-color: var(--ion-color-dark);
+}
+
 ion-button:not(.btn-toogle){
   --border-radius: 5px;
+}
+
+
+.full-width {
+  width: 100%;
+  display: inline-block;
+}
+
+.auto-width {
+  width: auto;
+}
+
+.full-width-sm {
+  @media (min-width: 576px) {
+    width: 100%;
+  }
+}
+
+.auto-width-sm {
+  @media (min-width: 576px) {
+    width: auto;
+  }
+}
+
+.full-width-md {
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+}
+
+.auto-width-md {
+  @media (min-width: 768px) {
+    width: auto;
+  }
+}
+
+.full-width-lg {
+  @media (min-width: 992px) {
+    width: 100%;
+  }
+}
+
+.auto-width-lg {
+  @media (min-width: 992px) {
+    width: auto;
+  }
+}
+
+.full-width-xl {
+  @media (min-width: 1200px) {
+    width: 100%;
+  }
+}
+
+.auto-width-xl {
+  @media (min-width: 1200px) {
+    width: auto;
+  }
+}
+
+/* Mostrar elementos solo en móviles */
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+.ion-display-flex{
+  display: flex;
+}
+.ion-display-inline-flex{
+  display: inline-flex;
+}
+.ion-flex-column, ion-button.ion-flex-column *[part=native]{
+  flex-direction: column;
 }

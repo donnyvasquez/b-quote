@@ -3,13 +3,14 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from "../pipes/strip-html.pipe";
+import { ModalSendBusinessPlanComponent } from '../modal-send-business-plan/modal-send-business-plan.component';
 
 @Component({
   selector: 'app-police-plan-card',
   templateUrl: './police-plan-card.component.html',
   styleUrls: ['./police-plan-card.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe]
+  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent]
 })
 export class PolicePlanCardComponent {
   modalTemplate!: TemplateRef<any>;
@@ -22,21 +23,40 @@ export class PolicePlanCardComponent {
   @Input() planCoverage: string = '';
   @Input() deductibleMount: string[] = [];
   @Input() aditionalCoverageOptions: { icon: string; label: string }[] = [];
+  @Input() planPaymentPlan: string = '';
+  @Input() promoPercents: string | undefined= '';
+  @Input() promoPlanPaymentPlan: string | undefined = '';
+  @Input() validDate: string | undefined = '';
+  @Input() promoPlanPrice: number | undefined = 0;
+  @Output() planSelected = new EventEmitter<boolean>();
 
-  @Output() planSelected = new EventEmitter<void>();
-
+  selectedCount: number = 0;
   showOptions: boolean = false;
   canDismiss = true;
   presentingElement: Element | null = null;
   elementId: any;
+  toastMessage: string = '';
+  isCardContentVisible = false;
 
   ngOnInit() {
     this.elementId = 'police-plan-card-'+this.planId;
     this.presentingElement = document.querySelector(this.elementId);
   }
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    readonly modalSendController: ModalController
+  ) {}
 
+  async openModalSendPlan() {
+    const modalSend = await this.modalSendController.create({
+      component: ModalSendBusinessPlanComponent,
+    });
+    return await modalSend.present();
+  }
+  toggleCardContent() {
+    this.isCardContentVisible = !this.isCardContentVisible;
+  }
   // Si el clic es en el ion-checkbox, no hacemos nada y dejamos que maneje su propio cambio
   toggleCheckbox(event: Event, checkbox: any) {
     if (event.target && ((event.target as HTMLElement).tagName === 'ION-CHECKBOX') || (event.target as HTMLElement).tagName === 'ION-ITEM')  {
@@ -44,6 +64,13 @@ export class PolicePlanCardComponent {
     }
     // Si no fue en el ion-checkbox, cambiamos el estado del checkbox
     checkbox.checked = !checkbox.checked;
+  }
+  onCheckboxChange(event: any) {
+    this.planSelected.emit(event.detail.checked);
+  }
+
+  onPlanSelected(isChecked: boolean) {
+    this.selectedCount += isChecked ? 1 : -1;
   }
 
   selectPlan() {

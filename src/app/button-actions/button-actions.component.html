@@ -1,12 +1,12 @@
-<ion-backdrop (ionBackdropTap)="toggleButtons()" class="custom-backdrop" [hidden]="!showButtons" aria-hidden="false" ></ion-backdrop>
+<ion-backdrop (ionBackdropTap)="toggleButtons()" class="custom-backdrop" [ngClass]="{'ion-hide': !showButtons}" aria-hidden="true" ></ion-backdrop>
 
-<ion-footer slot="end" mode="ios" class="app-button-actions">
-  <section class="d-flex justify-content-between gap-3">
+<ion-footer slot="end" mode="ios" class="app-button-actions ion-padding">
+  <section class="ion-display-flex ion-justify-content-between gap-3">
     <ion-button mode="ios" fill="outline" class="mt-2">
       Cancelar
     </ion-button>
 
-    <div class="app-button-actions--wrapper position-relative d-inline-block">
+    <div class="app-button-actions--wrapper">
       <div class="btn-group separate-active pt-2">
         <ion-button #quoteSaveButton id="quoteSaveButton" class="app-button-actions--save-quote-button" mode="ios" navigate="./">
           Guardar y enviar cotización
@@ -19,9 +19,9 @@
         [ngClass]="{
           'opacity-0 movedown': !showButtons,
           'opacity-100 showedButtons': showButtons,
-          'd-none': hideAfterTransition
+          'ion-hide': hideAfterTransition
         }"
-        class="app-button-actions--options button-group position-absolute d-flex flex-column bottom-100 end-0 btns-group align-items-end gap-2"
+        class="app-button-actions--options button-group position-absolute ion-display-flex ion-flex-column bottom-100 end-0 btns-group align-items-end gap-2"
         (transitionend)="onTransitionEnd()"
       >
         <ion-button mode="ios">Guardar Póliza <ion-icon name="save"></ion-icon>

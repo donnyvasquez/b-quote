@@ -1,11 +1,56 @@
+:host{
+  --ion-color-primary: #0079C8;
+  --san-color-primary: #0079C8;
+  --san-color-secondary-25: #0652AE;
+  --san-grey-175: #4E5357;
+}
+.san-color-primary{
+  color: var(--san-color-primary);
+  --color: var(--san-color-primary);
+}
+.san-color-secondary-25{
+  color: var(--san-color-secondary-25);
+  --color: var(--san-color-secondary-25);
+}
+.san-grey-175{
+  color: var(--san-grey-175);
+  --color: var(--san-grey-175);
+}
+
+@media (max-width: 767px) {
+  /* Definir clases para mostrar/ocultar */
+  .hiddenContentCard{
+    display: none;
+  }
+
+  .visibleContentCard{
+    display: block;
+  }
+}
+
+*[class*="police-plan-card-"] {
+  height: 100%;
+}
 ion-card {
   --border-radius: 10px;
-  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  --inner-overflow: visible
+  border: 0.5px solid var(--ion-color-light-shade);
+  --inner-overflow: visible;
+  box-shadow: none;
+  transition: all 0.25s ease-in-out;
+  transform: scale3d(0.9925);
+  &:hover{
+    transform: scale3d(1);
+    z-index: 1;
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.25);
+  }
 }
 ion-card-header{
   flex-direction: column;
   padding-bottom: 0px;
+
+  ion-checkbox.checkbox-label-placement-start::part(label) {
+    margin-inline-end: 4px;   /* Margen al final */
+  }
 }
 ion-card-title {
   font-size: 1.5rem;
@@ -17,18 +62,57 @@ ion-card-subtitle {
   color: #7f8c8d;
 }
 
-ion-card-content p {
-  margin-bottom: 0;
+ion-card-content{
+  padding-top: 0;
+  p {
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: #34495e;
+    &.ion-margin-bottom{
+      margin-bottom: 1rem;
+    }
+  }
+
+  .plan-payment-plan{
+    .plan-price{
+      font-size: 1.85rem;
+      color: var(--san-color-secondary-25);
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      font-weight:bold;
+    }
+  }
+}
+.plan-payment-promo{
   font-size: 1rem;
-  color: #34495e;
-  &.ion-margin-bottom{
-    margin-bottom: 1rem;
+  h3{
+    font-size: 1.85rem;
+    font-weight:bold;
+    sup{
+      text-decoration: line-through 0.75px;
+      font-size: 1.15rem;
+    }
+  }
+}
+.plan-payment-promo-in-content{
+  h3{
+    font-size: 1.85rem;
+    color: var(--san-color-secondary-25);
+    display: inline-block;
+    width: 100%;
+    font-weight:bolder;
+    sup{
+      text-decoration: line-through 0.75px;
+      font-size: 1.15rem;
+    }
   }
 }
 ion-checkbox {
-  --checkbox-background-checked: #0079C8;
-  --border-color: #0079C8;
-  --border-color-checked: #0079C8;
+  --checkbox-background-checked: var(--san-color-primary);
+  --border-color: var(--ion-color-medium);
+  --border-width: 1.5px;
+  --border-color-checked: var(--san-color-primary);
 }
 ion-button {
   --border-radius: 5px;
@@ -40,7 +124,11 @@ ion-button {
   }
 }
 ion-modal{
-  --height: auto;
+
+  @media (min-width: 768px){
+    padding: 0;
+  }
+  --border-radius: 8px;
 }
 .aditional-coverage-options{
   ion-item{
@@ -55,7 +143,19 @@ ion-modal{
     }
   }
 }
-::ng-deep .more-plan-deductible-options{
+.card-footer-content{
+  margin-top:auto;
+}
+.featured-medical-benefits{
+  ion-accordion ion-item[slot='header'],
+  ion-accordion ion-item[slot='header'],
+  ion-accordion ion-item[slot='header']:hover {
+    --background-hover: transparent;
+    --color: var(--san-color-secondary-25);
+  }
+}
+::ng-deep .more-plan-deductible-options,
+ion-modal{
   ion-card{
     --inner-overflow: visible
   }

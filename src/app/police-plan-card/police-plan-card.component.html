@@ -1,20 +1,36 @@
-<ion-card mode="ios" class="ion-no-margin police-plan-card-{{planId}}">
-  <ion-card-header  mode="ios">
-      <ion-row class="ion-justify-content-between">
-        <ion-col><ion-card-title *ngIf="planTitle" mode="ios"><span [innerHtml]="planTitle"></span></ion-card-title></ion-col>
-        <ion-col size="auto" class="text-end ion-no-padding"><ion-checkbox mode="md" ></ion-checkbox></ion-col>
-      </ion-row>
-      <ion-card-subtitle hidden mode="ios">{{ planSubtitle }}</ion-card-subtitle>
-    <hr *ngIf="planTitle" >
+<ion-card mode="ios" class="police-plan-card-{{planId}} ion-no-margin ion-display-flex ion-flex-column">
+  <ion-card-header mode="ios">
+
+    <ion-row class="ion-justify-content-between">
+      <ion-col size="auto" class="text-start ion-no-padding">
+        <!-- Botón de toggle visible solo en móviles -->
+        <ion-button class="mobile-only ion-no-padding" fill="clear" slot="" (click)="toggleCardContent()">
+          <ion-icon [name]="isCardContentVisible ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col><ion-card-title *ngIf="planTitle" mode="ios"><span [innerHtml]="planTitle"></span></ion-card-title></ion-col>
+      <ion-col size="auto" class="text-end ion-no-padding">
+        <ion-checkbox
+          #selectPolicePlanCard
+          mode="md"
+          id="select-police-plan-card-{{planId}}"
+          (ionChange)="toastMessage = $event.detail.checked ? 'Has seleccionado el plan' : 'Quitaste el plan'; toast.present(); onCheckboxChange($event)">
+          Comparar
+        </ion-checkbox>
+      </ion-col>
+    </ion-row>
+    <ion-card-subtitle hidden mode="ios">{{ planSubtitle }}</ion-card-subtitle>
+    <hr *ngIf="planTitle" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
   </ion-card-header>
 
-  <ion-card-content  mode="ios">
+  <ion-card-content mode="ios" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
     <div *ngIf="planMountLimit || planCoverage" class="plan-mount plan-coverage">
       <p *ngIf="planMountLimit">{{planMountLimit}}</p>
       <p *ngIf="planCoverage">{{planCoverage}}</p>
       <hr>
     </div>
-    <div class="plan-deductible-mount" *ngIf="deductibleMount.length>0">
+
+    <div class="plan-deductible-mount" *ngIf="deductibleMount.length > 0">
       <ion-label class="d-block">Deducibles: {{deductibleMount.length}} <ion-icon color="primary" name="information-circle-outline"></ion-icon></ion-label>
       <div *ngFor="let mount of deductibleMount">
         <p class="ion-no-margin">{{ mount }}</p>
@@ -25,60 +41,106 @@
         </ion-button>
 
         <ion-modal
-          #modal
-          trigger="open-more-plan-deductible-options-modal-{{planId}}"
-          [canDismiss]="canDismiss"
+        backdropDismiss="true"
+        [presentingElement]="presentingElement"
+        #modal
+        show-backdrop="true"
+        trigger="open-more-plan-deductible-options-modal-{{planId}}"
+        [canDismiss]="canDismiss"
         >
           <ng-template>
             <ion-header>
               <ion-toolbar>
-                <ion-title slot="start">{{planTitle|stripHtml}}</ion-title>
+                <ion-title class="text-start">{{planTitle | stripHtml}}</ion-title>
                 <ion-buttons slot="end">
                   <ion-button (click)="modal.dismiss()"><ion-icon name="close-outline"></ion-icon></ion-button>
                 </ion-buttons>
               </ion-toolbar>
             </ion-header>
-            <ion-card mode="ios" class="ion-no-margin">
+            <ion-content>
               <ion-list>
-                <ion-item>
-                  <ion-label>Plan 1: <br>
-                    Dentro del País: US$ 1,000 <br>
-                    Fuera del País: US$ 2,000
-                  </ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Plan 2: <br>
-                    Dentro del País: US$ 1,000 <br>
-                    Fuera del País: US$ 2,000
-                  </ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Plan 3: <br>
-                    Dentro del País: US$ 1,000 <br>
-                    Fuera del País: US$ 2,000
-                  </ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Plan 4: <br>
-                    Dentro del País: US$ 1,000 <br>
-                    Fuera del País: US$ 2,000
-                  </ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Plan 5: <br>
-                    Dentro del País: US$ 1,000 <br>
-                    Fuera del País: US$ 2,000
-                  </ion-label>
-                </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 1: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 2: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 3: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 4: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Plan 5: <br>
+                      Dentro del País: US$ 1,000 <br>
+                      Fuera del País: US$ 2,000
+                    </ion-label>
+                  </ion-item>
               </ion-list>
-            </ion-card>
+
+            </ion-content>
           </ng-template>
         </ion-modal>
-
       </div>
       <hr>
     </div>
-    <div class="aditional-coverage-options" *ngIf="aditionalCoverageOptions.length>0">
+
+    <div class="aditional-coverage-options" *ngIf="aditionalCoverageOptions.length > 0">
       <p class="ion-margin-bottom">Este producto ofrece opciones de cobertura adicionales.</p>
       <ion-list>
         <ion-item *ngFor="let option of aditionalCoverageOptions" (click)="toggleCheckbox($event, checkbox)">
@@ -89,11 +151,58 @@
       </ion-list>
       <hr>
     </div>
-    <p>{{ planDescription }}</p>
-    <p><strong>Price:</strong> {{ planPrice | currency }}</p>
+
+    <div *ngIf="planPaymentPlan || planPrice" id="planPaymentPlanTemplate" class="plan-payment-plan">
+      <p *ngIf="planPaymentPlan"><span [innerHtml]="planPaymentPlan"></span></p>
+      <h3 *ngIf="planPrice" class="plan-price san-secondary-25">{{ planPrice | currency }}</h3>
+    </div>
   </ion-card-content>
 
-  <ion-button  mode="ios" color="primary" (click)="selectPlan()">
-    Seleccionar Plan
-  </ion-button>
+  <div id="planPaymentPromo" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible" class="ion-padding ion-background-secondary plan-payment-promo">
+    <p><strong>Precio promocional: {{promoPercents}} de descuento</strong></p>
+    <p><span [innerHtml]="promoPlanPaymentPlan"></span></p>
+    <hr>
+    <p>{{validDate}}</p>
+    <h3 class="ion-text-center"><sup class="text-overline">{{planPrice | currency}}</sup> {{promoPlanPrice | currency }}</h3>
+  </div>
+
+  <ion-accordion-group [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible" class="featured-medical-benefits ion-padding-horizontal">
+    <ion-accordion value="first">
+      <ion-item slot="header">
+        <ion-label>Beneficios médicos destacados</ion-label>
+      </ion-item>
+      <div class="ion-padding ion-text-start" slot="content">
+        <p>Deducible anual por persona</p>
+        <p>Cobertura maternidad</p>
+        <p>Mejora de la cobertura de condiciones preexistentes a partir del mes 13</p>
+        <p>Tratamiento integral del cancer</p>
+        <p>Limite máximo por incapacida por año por poliza</p>
+        <p>Prima gratis para 2 niños de hasta 10 años.</p>
+      </div>
+    </ion-accordion>
+    <hr class="ion-no-margin">
+  </ion-accordion-group>
+
+  <ion-card-content class="card-footer-content ion-padding ion-text-center ion-margin-top" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
+    <ion-button class="ion-text-underline" fill="clear" expand="block">Más iformación</ion-button>
+    <ion-button id="open-modal-send-plan-{{planId}}" class="ion-text-underline" fill="clear" expand="block">Enviar cotización</ion-button>
+
+    <ion-button shape="solid" mode="ios" color="primary" (click)="selectPlan()">
+      Seleccionar Plan
+    </ion-button>
+  </ion-card-content>
+
+
+  <div id="planPaymentPromoInContent" class="ion-padding plan-payment-promo-in-content mobile-only" [class.hiddenContentCard]="isCardContentVisible" [class.visibleContentCard]="!isCardContentVisible">
+    <h3 class="ion-text-center san-color-secondary-25"><sup class="text-overline">{{planPrice | currency}}</sup> {{promoPlanPrice | currency }}</h3>
+  </div>
+  <ion-toast
+    #toast
+    swipe-gesture="vertical"
+    icon="information-circle-outline"
+    [message]="toastMessage + ': ' + planTitle"
+    duration="2000"
+    position="top">
+  </ion-toast>
 </ion-card>
+<app-modal-send-business-plan planId="open-modal-send-plan-{{planId}}"></app-modal-send-business-plan>

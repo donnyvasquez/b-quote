@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Renderer2 } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonBackdrop, IonFooter } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +13,7 @@ export class ButtonActionsComponent implements OnInit {
   public showButtons = false;
   public hideAfterTransition = true;
 
-  constructor() { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
     console.log('Se inicia el componente buttons');

@@ -1,82 +1,38 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+<ion-menu content-id="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div class="container ">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-    <ion-grid class="custom-grid">
-      <ion-row class="custom-row">
-        <ion-col class="d-none d-sm-block" sizeSm="4" sizeMd="4">Producto</ion-col>
-        <ion-col size="4">Precio</ion-col>
-        <ion-col size="4">Cantidad</ion-col>
-      </ion-row>
-      <ion-row class="custom-row">
-        <ion-col class="d-none d-sm-block" sizeSm="4" sizeMd="4">Producto 1</ion-col>
-        <ion-col size="4">$10</ion-col>
-        <ion-col size="4">2</ion-col>
-      </ion-row>
-      <ion-row class="custom-row">
-        <ion-col class="d-none d-sm-block" sizeSm="4" sizeMd="4">Producto 2</ion-col>
-        <ion-col size="4">$20</ion-col>
-        <ion-col size="4">1</ion-col>
-      </ion-row>
-    </ion-grid>
-    <h2 class="mt-5">Componente botón de acciones</h2>
-    <app-button-actions></app-button-actions>
-    <h2 class="mt-5">Tarjeta de planes de pólizas</h2>
-    <ion-row>
-      <ion-col size="12" sizeMd="4">
-        <app-police-plan-card
-          [planId]="'1'"
-          [planTitle]="'Bupa Flex 1 <br/> Limite máximo: 1 millón <br/> Cobertura: Latinoamérica, el <strong class=text-danger>Caribe y EE.UU</strong>'"
-          [planSubtitle]="'Cobertura mínima'"
-          [planDescription]="'Este plan ofrece una cobertura básica para tu vehículo.'"
-          [planPrice]="120.00"
-          [planMountLimit]="'Limite máximo: 3.5 millones'"
-          [planCoverage]="'Cobertura: Latinoamérica, el Caribe y EE.UU.'"
-          [deductibleMount]="['Dentro del País: USD 500','Fuera del País: USD 1,000']"
-          [aditionalCoverageOptions]="[{ icon: 'medkit-outline', label: 'Transplante de órganos' }, { icon: 'heart-outline', label: 'Maternidad' }, { icon: 'airplane-outline', label: 'Piloto' },]"
-          (planSelected)="onPlanSelected()">
-        </app-police-plan-card>
-      </ion-col>
-      <ion-col size="12" sizeMd="4">
-        <app-police-plan-card
-          [planId]="'2'"
-          [planTitle]="'Plan Básico'"
-          [planSubtitle]="'Cobertura mínima'"
-          [planDescription]="'Este plan ofrece una cobertura básica para tu vehículo.'"
-          [planPrice]="120.00"
-          [planMountLimit]="'Limite máximo: 3.5 millones'"
-          [planCoverage]="'Cobertura: Latinoamérica, el Caribe y EE.UU.'"
-          [deductibleMount]="['Dentro del País: USD 500','Fuera del País: USD 1,000']"
-          [aditionalCoverageOptions]="[{ icon: 'medkit-outline', label: 'Transplante de órganos' }, { icon: 'heart-outline', label: 'Maternidad' }, { icon: 'airplane-outline', label: 'Piloto' },]"
-          (planSelected)="onPlanSelected()">
-        </app-police-plan-card>
-      </ion-col>
-      <ion-col size="12" sizeMd="4">
-        <app-police-plan-card
-          [planId]="'3'"
-          [planTitle]="'Plan Básico'"
-          [planSubtitle]="'Cobertura mínima'"
-          [planDescription]="'Este plan ofrece una cobertura básica para tu vehículo.'"
-          [planPrice]="120.00"
-          [deductibleMount]="['Dentro del País: USD 500','Fuera del País: USD 1,000']"
-          [aditionalCoverageOptions]="[{ icon: 'medkit-outline', label: 'Transplante de órganos' }, { icon: 'heart-outline', label: 'Maternidad' }, { icon: 'airplane-outline', label: 'Piloto' },]"
-          (planSelected)="onPlanSelected()">
-        </app-police-plan-card>
-      </ion-col>
-    </ion-row>
-  </div>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/international-business-quote" routerDirection="forward">
+        <ion-label>New International Business</ion-label>
+      </ion-item>
+      <ion-item routerLink="/new-local-business" routerDirection="forward">
+        <ion-label>New Local Business</ion-label>
+      </ion-item>
+      <ion-item routerLink="/renewal" routerDirection="forward">
+        <ion-label>Renewals</ion-label>
+      </ion-item>
+      <ion-item routerLink="/new-policy" routerDirection="forward">
+        <ion-label>New Policies</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-content id="main-content">
+
 </ion-content>

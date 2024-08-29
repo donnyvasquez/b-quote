@@ -1,0 +1,82 @@
+<ion-modal
+  backdropDismiss="true"
+  [presentingElement]="presentingElement"
+  #modalSendPlan
+  show-backdrop="true"
+  [trigger]="planId"
+  [canDismiss]="canDismiss"
+
+  >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Guardar y enviar cotización</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="modalSendPlan.dismiss()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <!-- Imagen en la parte superior -->
+      <img src="assets/images/send-plan-header.png" alt="Imagen de referencia" style="width: 100%; max-height: 200px; object-fit: cover;">
+
+      <!-- Campos de Nombre, Apellido y Email -->
+      <ion-item>
+        <ion-label position="floating">Nombre(s) del titular</ion-label>
+        <ion-input placeholder="Nombre(s) del titular"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido(s) del titular</ion-label>
+        <ion-input placeholder="Apellido(s) del titular"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input placeholder="correo@correo.com"></ion-input>
+      </ion-item>
+
+      <!-- Checkbox para habilitar contacto -->
+      <ion-item>
+        <ion-checkbox slot="start"></ion-checkbox>
+        <ion-label>Quiero me contacten para recibir información (Opcional).</ion-label>
+      </ion-item>
+
+      <!-- Radio buttons para escoger método de contacto -->
+      <ion-list-header>
+        <ion-label>¿Cómo te gustaría ser contactado?</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-radio-group>
+          <ion-item>
+            <ion-label>Por teléfono</ion-label>
+            <ion-radio slot="start" value="telefono"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Por correo electrónico</ion-label>
+            <ion-radio slot="start" value="email"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-item>
+
+      <!-- Input para teléfono (solo visible si se elige "Por teléfono") -->
+      <ion-item *ngIf="selectedContactMethod === 'telefono'">
+        <ion-label position="floating">Número de teléfono</ion-label>
+        <ion-input placeholder="Número de teléfono"></ion-input>
+      </ion-item>
+
+      <!-- Términos y condiciones -->
+      <ion-text>
+        <p>Desde Bupa Global Latinoamérica, cumplimos con la Ley Orgánica de Protección de Datos Personales y otras normativas aplicables, en el uso de sus datos personales...</p>
+      </ion-text>
+    </ion-content>
+
+    <!-- Botón de enviar en el footer -->
+    <ion-footer>
+      <ion-toolbar>
+        <ion-button expand="block" (click)="modalSendPlan.dismiss()">Enviar</ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>
