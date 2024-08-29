@@ -1,0 +1,18 @@
+<ion-list mode="md">
+  <ion-radio-group *ngIf="options" [(ngModel)]="selectedValue">
+      <ion-list-header *ngIf="groupLabel" class="ion-text-center">
+        <ion-label>{{ groupLabel }}</ion-label>
+      </ion-list-header>
+      <ion-row>
+        <ion-col *ngFor="let option of options">
+          <ion-item lines="none" (click)="selectRadio($event, option)">
+            <ion-radio [value]="option.value" alignment="start"></ion-radio>
+            <ion-label>
+              <h2>{{ option.label }}</h2>
+              <p>{{ option.description }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+  </ion-list>

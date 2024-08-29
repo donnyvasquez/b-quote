@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
 import { PolicePlanCardComponent } from '../police-plan-card/police-plan-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
+import { BupaIonRadioComponent } from "../bupa-ion-radio/bupa-ion-radio.component";
 
 @Component({
   selector: 'app-international-business-plans',
   templateUrl: './international-business-plans.component.html',
   styleUrls: ['./international-business-plans.component.scss'],
   standalone: true,
-  imports: [ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule],
+  imports: [ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule, BupaIonRadioComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InternationalBusinessPlansComponent  implements OnInit {
 

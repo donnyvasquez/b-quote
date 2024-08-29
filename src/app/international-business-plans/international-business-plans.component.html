@@ -49,8 +49,38 @@
         </app-police-plan-card>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col size="12">
+        <hr class="ion-margin">
+        <h2>¿Necesitas más opciones?</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-row>
+          <ion-col size="12">
+            <app-bupa-ion-radio
+              [groupLabel]="'Seguros Internacionales Premium'"
+              [options]="[
+                { label: 'Seguro Internacional', description: 'Cobertura global con acceso a los mejores hospitales', value: '1' },
+                { label: 'Seguro Nacional', description: 'Cobertura a nivel nacional con hospitales selectos', value: '2' },
+                { label: 'Seguro intergaláctico', description: 'Cobertura a nivel presidencial con hospitales el Marte y Júpiter', value: '3' }
+              ]">
+            </app-bupa-ion-radio>
+          </ion-col>
+        </ion-row>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <hr>
+        <h2></h2>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
+
 <ion-footer mode="ios" translucent="false" *ngIf="selectedCount > 0">
   <ion-toolbar class="ion-text-center plan-ion-toolbar">
     <ion-button
