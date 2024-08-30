@@ -2,6 +2,7 @@ ion-radio-group, ion-item {
   --border-radius: 12px;
   --border-width: 0;
   --border-color: transparent;
+  height: 100%;
   ion-radio{
     max-width: fit-content;
     margin-inline-end: 1rem;
@@ -25,4 +26,14 @@ ion-label p {
 ion-list-header {
   font-size: 18px;
   font-weight: bold;
+}
+
+.vertical-line{
+  position: absolute;
+  top:8px;
+  right: -0.5px;
+  bottom: 8px;
+  width: 1px;
+  display: block;
+  background-color: #DDE1E6;
 }

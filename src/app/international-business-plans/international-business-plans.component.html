@@ -49,33 +49,62 @@
         </app-police-plan-card>
       </ion-col>
     </ion-row>
-    <ion-row class="ion-text-center">
-      <ion-col size="12">
-        <hr class="ion-margin">
-        <h2>¿Necesitas más opciones?</h2>
-      </ion-col>
-    </ion-row>
+    <section #moreOptionsSection>
+      <ion-row class="ion-text-center">
+        <ion-col size="12">
+          <hr class="ion-margin">
+          <h2>¿Necesitas más opciones?</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="12">
+              <span #moreOptionsAnchor></span>
+              <app-bupa-ion-radio
+                [groupLabel]="'Seguros Internacionales Premium'"
+                [options]="[
+                  { label: 'Seguro Internacional', description: 'Cobertura global con acceso a los mejores hospitales', value: '1' },
+                  { label: 'Seguro Nacional', description: 'Cobertura a nivel nacional con hospitales selectos', value: '2' }
+                  ]"
+                (optionSelected)="onMoreOptionSelected($event)"
+                >
+              </app-bupa-ion-radio>
+            </ion-col>
+          </ion-row>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col *ngFor="let plan of morePlansShowed" size="12" sizeMd="4">
+              <app-police-plan-card
+                [planId]="plan.planId"
+                [planTitle]="plan.planTitle"
+                [planSubtitle]="plan.planSubtitle"
+                [planDescription]="plan.planDescription"
+                [planPrice]="plan.planPrice"
+                [planMountLimit]="plan.planMountLimit"
+                [planCoverage]="plan.planCoverage"
+                [planPaymentPlan]="plan.planPaymentPlan"
+                [deductibleMount]="plan.deductibleMount"
+                [promoPercents]="plan.promoPercents"
+                [promoPlanPaymentPlan]="plan.promoPlanPaymentPlan"
+                [validDate]="plan.validDate"
+                [promoPlanPrice]="plan.promoPlanPrice"
+                [aditionalCoverageOptions]="plan.aditionalCoverageOptions"
+                (planSelected)="onPlanSelected($event)">
+              </app-police-plan-card>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </section>
     <ion-row>
-      <ion-col size="12">
-        <ion-row>
-          <ion-col size="12">
-            <app-bupa-ion-radio
-              [groupLabel]="'Seguros Internacionales Premium'"
-              [options]="[
-                { label: 'Seguro Internacional', description: 'Cobertura global con acceso a los mejores hospitales', value: '1' },
-                { label: 'Seguro Nacional', description: 'Cobertura a nivel nacional con hospitales selectos', value: '2' },
-                { label: 'Seguro intergaláctico', description: 'Cobertura a nivel presidencial con hospitales el Marte y Júpiter', value: '3' }
-              ]">
-            </app-bupa-ion-radio>
-          </ion-col>
-        </ion-row>
-        <hr>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <hr>
-        <h2></h2>
+      <ion-col>
+       <p>La presente cotización es de carácter informativo, no vinculante y en ningún momento expresa consentimiento ni compromiso legal para suministrarle cobertura de seguro. Las primas del seguro pueden variar al momento de la suscripción de la póliza. La emisión de una póliza de seguro de Bupa está sujeta a todas las evaluaciones de riesgo, a la recepción de toda la información y pagos de prima requeridos.</p>
+       <p>Para una cotización más detallada por favor contáctenos.</p>
       </ion-col>
     </ion-row>
   </ion-grid>
