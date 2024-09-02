@@ -62,21 +62,42 @@
             <ion-col size="12">
               <span #moreOptionsAnchor></span>
               <app-bupa-ion-radio
+                [groupDirection]="'column'"
                 [groupLabel]="'Seguros Internacionales Premium'"
                 [options]="[
-                  { label: 'Seguro Internacional', description: 'Cobertura global con acceso a los mejores hospitales', value: '1' },
-                  { label: 'Seguro Nacional', description: 'Cobertura a nivel nacional con hospitales selectos', value: '2' }
+                  { label: 'Seguros Internacionales Premium', description: 'Si lo que buscas es un seguro médico completo, con protección premium, cobertura global y acceso a los mejores hospitales, clínicas, doctores y cuidados de salud de EE.UU. y del mundo.', value: '1' },
+                  { label: 'Seguro Internacionales', description: 'Si lo que buscas es la mejor cobertura para tus necesidades de cuidados médicos esenciales adaptada a tu cultura, en Latinoamérica, el Caribe y EE.UU.', value: '2' }
                   ]"
                 (optionSelected)="onMoreOptionSelected($event)"
                 >
               </app-bupa-ion-radio>
             </ion-col>
           </ion-row>
-          <hr>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12">
+          <div #moreOptionsFilter *ngIf="this.moreSelectedOption === '1'">
+            <p class="ion-text-center">Escoge entre estas opciones y te mostraremos los productos que se adaptan a tus necesidades</p>
+            <ion-row class="ion-no-padding">
+              <ion-col>
+                <ion-list class="ion-display-flex">
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start"></ion-checkbox>Seguro con Servicio Concierge
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start"></ion-checkbox>Red abierta (libre elección de proveedores)
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start"></ion-checkbox>Cobertura de Maternidad
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-checkbox slot="start"></ion-checkbox>Cobertura en caso de enfermedades graves o catastróficas sólamente
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
           <ion-row>
             <ion-col *ngFor="let plan of morePlansShowed" size="12" sizeMd="4">
               <app-police-plan-card
