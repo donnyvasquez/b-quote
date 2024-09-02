@@ -39,9 +39,8 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   public insured = ['Titular'];
 
   whoToInsureOptions = [
-    { value: 'individual', label: 'Individual' },
-    { value: 'family', label: 'Familia' },
-    { value: 'business', label: 'Negocio' }
+    { value: 'individual', label: 'Una persona' },
+    { value: 'family', label: 'Una familia' },
   ];
 
   relationshipOptions = [
@@ -53,32 +52,41 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   ];
 
   countryOptions = [
-    { value: 'us', label: 'Estados Unidos' },
+    { value: 'cl', label: 'Chile' },
+    { value: 'ec', label: 'Ecuador' },
+    { value: 'gt', label: 'Guatemala' },
+    { value: 'pa', label: 'Panamá' },
+    { value: 'py', label: 'Paraguay' },
+    { value: 'pe', label: 'Perú' },
     { value: 'mx', label: 'México' },
-    { value: 'ca', label: 'Canadá' }
+    { value: 'do', label: 'República Dominicana' },
+    { value: 'tt', label: 'Trinidad y Tobago' }
   ];
 
   productTypeOptions = [
-    { value: 'health', label: 'Seguro de Salud' },
-    { value: 'life', label: 'Seguro de Vida' },
-    { value: 'auto', label: 'Seguro de Auto' }
+    { value: 'international_premium', label: 'International Premium' },
+    { value: 'international', label: 'International' }
   ];
 
   productOptions: Record<string, { value: string; label: string; }[]> = {
-    health: [
-      { value: 'health-basic', label: 'Basic Health' },
-      { value: 'health-premium', label: 'Premium Health' },
+    international_premium: [
+      { value: 'bupa-global-major', label: 'Global Major Medical Health Plan' },
+      { value: 'bupa-global-select', label: 'Global Select Health Plan' },
+      { value: 'bupa-global-premiere', label:'Global Premier Health Plan'},
+      { value: 'bupa-global-elite', label: 'Global Elite Health Plan'},
+      { value: 'bupa-global-ultimate', label: 'Global Ultimate Health Plan'}
     ],
-    life: [
-      { value: 'life-basic', label: 'Basic Life' },
-      { value: 'life-premium', label: 'Premium Life' },
-    ],
-    auto: [
-      { value: 'auto-basic', label: 'Basic Auto' },
-      { value: 'auto-premium', label: 'Premium Auto' },
+    international: [
+      { value: 'bupa-essentiaql-500', label: 'Bupa Essential 500' },
+      { value: 'bupa-essentiaql-1000', label: 'Bupa Essential 1000' },
     ],
   };
 
+  selectedDay?: number;
+  selectedMonth?: number;
+  selectedYear?: number;
+  currentYear: number = new Date().getFullYear();
+  selectedRelationship: string = 'child';
   availableProducts: { value: string; label: string; }[] = [];
   selectedProductType: string | null = null;
 
@@ -137,7 +145,6 @@ export class InternationalBusinessQuoteComponent implements OnInit {
       }
     }, 200);
   }
-
 
   removeSlide(index: number) {
     this.insured.splice(index, 1);
