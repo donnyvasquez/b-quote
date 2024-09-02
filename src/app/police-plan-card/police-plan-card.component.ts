@@ -57,6 +57,14 @@ export class PolicePlanCardComponent {
   toggleCardContent() {
     this.isCardContentVisible = !this.isCardContentVisible;
   }
+  /*
+    note
+    In past versions of Ionic, ion-item was required for ion-checkbox to function properly.
+    Starting in Ionic 7.0, ion-checkbox should only be used in an ion-item when the item
+    is placed in an ion-list.
+    Additionally, ion-item is no longer required for ion-checkbox to function properly.
+  */
+
   // Si el clic es en el ion-checkbox, no hacemos nada y dejamos que maneje su propio cambio
   toggleCheckbox(event: Event, checkbox: any) {
     if (event.target && ((event.target as HTMLElement).tagName === 'ION-CHECKBOX') || (event.target as HTMLElement).tagName === 'ION-ITEM')  {
