@@ -30,10 +30,27 @@ ion-list-header {
 
 .vertical-line{
   position: absolute;
-  top:8px;
-  right: -0.5px;
-  bottom: 8px;
-  width: 1px;
   display: block;
   background-color: #DDE1E6;
+  left: 8px;
+  bottom: 0;
+  right: 8px;
+  height: 1px;
+  @media (min-width: 768px) {
+    top: 8px;
+    right: -0.5px;
+    bottom: 8px;
+    width: 1px;
+    left: unset;
+    height: unset;
+  }
+}
+
+.group-direction{
+  &-row{
+    flex-direction: row;
+  }
+  &-column{
+    flex-direction: column;
+  }
 }

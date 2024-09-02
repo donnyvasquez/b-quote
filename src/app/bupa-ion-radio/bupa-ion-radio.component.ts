@@ -14,11 +14,16 @@ import { FormsModule } from '@angular/forms';
 export class BupaIonRadioComponent {
   @Output() optionSelected = new EventEmitter<string>();
 
-  @Input() options: { label: string; description: string; value: string }[]  | undefined;
+  @Input() options: { label: string; description: string; value: string;}[]  | undefined;
+  @Input() groupDirection: 'row' | 'column' = 'row';
   @Input() groupLabel: string = '';
   @Input() singleLabel: string = 'Opción única';
   @Input() singleDescription: string = 'Descripción única';
   selectedValue: any;
+
+  getColumnSize(): string {
+    return this.groupDirection === 'column' ? '12' : '6';
+  }
 
   selectRadio(event: Event, option: any) {
     const target = event.target as HTMLElement;
