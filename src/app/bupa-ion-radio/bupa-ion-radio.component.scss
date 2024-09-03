@@ -1,6 +1,7 @@
 ion-radio-group, ion-item {
   --border-radius: 12px;
   --border-width: 0;
+  user-select: none;
   --border-color: transparent;
   height: 100%;
   ion-radio{
