@@ -54,14 +54,19 @@
                 <ion-card-content class="ion-padding-top">
                   <ion-row>
                     <ion-col size="12"><ion-label size="12">Fecha de nacimiento</ion-label></ion-col>
-                    <ion-col size="4">
-                      <ion-input labelPlacement="stacked" label="DD" type="number" maxlength="2" min="1" max="31"></ion-input>
-                    </ion-col>
-                    <ion-col size="4">
-                      <ion-input labelPlacement="stacked" label="MM" type="number" min="1" max="12"></ion-input>
-                    </ion-col>
-                    <ion-col size="4">
-                      <ion-input labelPlacement="stacked" label="AAAA" type="number" min="1900" max="2024"></ion-input>
+                    <ion-col size="12">
+                      <ion-datetime-button mode="ios" expand="full" datetime="birthdate-persona-{{i}}"></ion-datetime-button>
+
+                      <ion-modal [keepContentsMounted]="true">
+                        <ng-template>
+                          <ion-datetime
+                            required
+                            presentation="date"
+                            [formatOptions]="{ date: {year: 'numeric',weekday: 'long', month: 'long', day: '2-digit'}}"
+                            id="birthdate-persona-{{i}}">
+                          </ion-datetime>
+                        </ng-template>
+                      </ion-modal>
                     </ion-col>
                   </ion-row>
                   <ion-row *ngIf="i > 0">

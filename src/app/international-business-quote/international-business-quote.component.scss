@@ -59,3 +59,12 @@ ion-card {
 .round-button {
   --border-radius: 50%;
 }
+
+ion-datetime-button::part(native) {
+  width: 100%; /* Hace que el botón ocupe el 100% del ancho */
+  padding: 16px; /* Ajusta el padding a lo que necesites */
+  box-sizing: border-box; /* Asegura que el padding no desborde el contenedor */
+  &::first-letter{
+    text-transform: capitalize;
+  }
+}
