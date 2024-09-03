@@ -5,11 +5,12 @@ ion-card {
   --box-shadow: none;
   ion-select,
   ion-input {
-    --padding-start: 0.5rem; /* Ajusta el padding para que coincida */
-    --padding-end: 0.5rem;
-    --background: white; /* O el color que prefieras */
-    --border-radius: 5px; /* Igual que el borde exterior del input */
-    --box-shadow: none; /* Elimina sombras si hay alguna */
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    --background: white;
+    --border-radius: 5px;
+    --border-width: 0px;
+    --box-shadow: none;
   }
 
   /* Para los elementos de ion-select */
@@ -29,7 +30,7 @@ ion-card {
 }
 
 .user-data-swiper-slide{
-  width: 312px;
+  width: 296px;
   .user-data-swiper-card-header{
     display: flex;
     justify-content: space-between;
@@ -60,11 +61,16 @@ ion-card {
   --border-radius: 50%;
 }
 
-ion-datetime-button::part(native) {
-  width: 100%; /* Hace que el botón ocupe el 100% del ancho */
-  padding: 16px; /* Ajusta el padding a lo que necesites */
-  box-sizing: border-box; /* Asegura que el padding no desborde el contenedor */
-  &::first-letter{
-    text-transform: capitalize;
+ion-datetime-button{
+  &::part(native) {
+    width: 100%;
+    padding-block: 0;
+    padding-inline-end: 0;
+  }
+  ion-item{
+    --background: transparent;
+    .formatedDate::first-letter{
+      text-transform: capitalize;
+    }
   }
 }

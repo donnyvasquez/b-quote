@@ -20,18 +20,19 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   @ViewChild('swiper') swiper: any;
 
   slideConfig = {
-    effect: 'coverflow',
-    coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 2,
-      slideShadows: true
-    },
+    effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 10,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: false,
+      },
     slidesToScroll: 1,
     loop: false,
-    slidesPerView: 'auto',
-    centeredSlides: true,
     spaceBetween: 30
   };
 
@@ -82,10 +83,7 @@ export class InternationalBusinessQuoteComponent implements OnInit {
     ],
   };
 
-  selectedDay?: number;
-  selectedMonth?: number;
-  selectedYear?: number;
-  currentYear: number = new Date().getFullYear();
+  selectedBirthDate: string[] = [];
   selectedRelationship: string = 'child';
   availableProducts: { value: string; label: string; }[] = [];
   selectedProductType: string | null = null;
@@ -137,8 +135,8 @@ export class InternationalBusinessQuoteComponent implements OnInit {
     setTimeout(() => {
       console.log('Entré al setTimeout');
 
-      const newSlideElement = document.querySelector(`swiper-slide:nth-child(${newIndex + 1}) input`);
-      console.log('Esta es el nuevo slide: '+newSlideElement);
+      const newSlideElement = document.querySelector(`swiper-slide:last-child`);
+      console.log('Esta es el nuevo slide: '+newSlideElement?.outerHTML);
 
       if (newSlideElement) {
         (newSlideElement as HTMLElement).focus();
@@ -148,6 +146,23 @@ export class InternationalBusinessQuoteComponent implements OnInit {
 
   removeSlide(index: number) {
     this.insured.splice(index, 1);
+  }
+
+  onBirthDateChange(event: any, index: number) {
+    // Obtén el valor formateado de la fecha seleccionada
+    const selectedDate = event.detail.value;
+    const date = new Date(selectedDate);
+
+    // Formatea la fecha como "jueves, 5 de julio de 2024"
+    const formattedDate = date.toLocaleDateString('es-ES', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    // Asigna la fecha seleccionada al array en la posición correspondiente
+    this.selectedBirthDate[index] = formattedDate;
   }
 
   navigateToPlans() {
