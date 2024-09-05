@@ -13,10 +13,16 @@ ion-modal{
     --background-activated: transparent;
   }
 }
-
+ion-radio-group.contactOptionsRadioGroup{
+  margin-block-end: 1rem;
+  display: inline-block;
+  ion-radio::part(label){
+    margin-inline: 0.5rem 0;
+  }
+}
 .modal-send-plan--terms{
-  height: 70px;
-  border: 1px solid #b0b0b0;
-  border-radius: 8px;
+  height: 130px;
+  border: 1px solid #DDE1E6;
+  border-radius: 4px;
   overflow: hidden;
 }
