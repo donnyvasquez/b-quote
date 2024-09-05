@@ -1,3 +1,19 @@
+ion-modal{
+  --width: 720px;
+  --height: 90%;
+  ion-header{
+    ion-icon {
+      color: var(--primary-color);
+    }
+  }
+  .input-fill-outline.sc-ion-input-md-h{
+    min-height: 48px;
+  }
+  ion-item{
+    --background-activated: transparent;
+  }
+}
+
 .modal-send-plan--terms{
   height: 70px;
   border: 1px solid #b0b0b0;

@@ -5,14 +5,13 @@
   show-backdrop="true"
   [trigger]="planId"
   [canDismiss]="canDismiss"
-  style="--width: 720px; --height: 90%"
   >
   <ng-template>
-    <ion-header>
+    <ion-header class="ion-no-border">
       <ion-toolbar>
-        <ion-title>Enviar cotización de este plan</ion-title>
+        <ion-title class="ion-hide">Enviar cotización de este plan</ion-title>
         <ion-buttons slot="end">
-          <ion-button (click)="modalSendPlan.dismiss()" class="btn-toogle" aria-label="Cerrar"><ion-icon name="close-outline"></ion-icon></ion-button>
+          <ion-button (click)="modalSendPlan.dismiss()" class="btn-toogle" aria-label="Cerrar formulario de enviar cotización"><ion-icon color="primary" size="large" aria-hidden="true" name="close-outline"></ion-icon></ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -52,29 +51,24 @@
         <ion-row>
           <ion-col>
             <!-- Checkbox para habilitar contacto -->
-            <ion-item lines="none">
-              <ion-checkbox slot="start"></ion-checkbox>
-              <ion-label slot="end">Quiero me contacten para recibir información (Opcional).</ion-label>
-            </ion-item>
+            <ion-checkbox class="ion-margin-vertical" (ionChange)="showContactOptionsToogle()" labelPlacement="end" justify="start">Quiero me contacten para recibir información (Opcional).</ion-checkbox>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="this.showContactOptions">
           <ion-col>
-            <!-- Radio buttons para escoger método de contacto -->
-            <p>¿Cómo te gustaría ser contactado?</p>
-            <ion-radio-group mode="md">
-              <ion-radio class="ion-margin-end" slot="start" value="telefono">Por teléfono</ion-radio>
+            <ion-radio-group (ionChange)="showSelectedContactOptionsChange($event)" #contactOptionsRadioGroup mode="md">
+              <ion-radio class="ion-margin-end" slot="start" value="phone">Por teléfono</ion-radio>
               <ion-radio slot="end" value="email">Por correo electrónico</ion-radio>
             </ion-radio-group>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="this.showContactOptions && selectedContactOption === 'phone'">
           <ion-col>
             <!-- Input para teléfono (solo visible si se elige "Por teléfono") -->
-            <ion-item *ngIf="selectedContactMethod === 'telefono'">
-              <ion-label position="floating">Número de teléfono</ion-label>
-              <ion-input placeholder="Número de teléfono"></ion-input>
-            </ion-item>
+            <ion-input mode="md"
+            label="Número de teléfono"
+            label-placement="floating"
+            fill="outline" placeholder="Número de teléfono"></ion-input>
           </ion-col>
         </ion-row>
         <ion-row>
