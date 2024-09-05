@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from "../pipes/strip-html.pipe";
 import { ModalSendBusinessPlanComponent } from '../modal-send-business-plan/modal-send-business-plan.component';
+import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 
 @Component({
   selector: 'app-police-plan-card',
@@ -12,7 +13,7 @@ import { ModalSendBusinessPlanComponent } from '../modal-send-business-plan/moda
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent]
 })
-export class PolicePlanCardComponent {
+export class PolicePlanCardComponent implements OnInit {
   modalTemplate!: TemplateRef<any>;
   @Input() planId!: string;
   @Input() planTitle: string = '';
@@ -44,6 +45,7 @@ export class PolicePlanCardComponent {
   }
 
   constructor(
+    readonly insuranceScenariosService: InsuranceScenariosService,
     private modalController: ModalController,
     readonly modalSendController: ModalController
   ) {}

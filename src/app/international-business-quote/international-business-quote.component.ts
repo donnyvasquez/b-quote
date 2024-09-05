@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import SwiperCore from 'swiper';
+import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 
 SwiperCore.use([]);
 
@@ -14,6 +15,7 @@ SwiperCore.use([]);
   styleUrls: ['./international-business-quote.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule],
+  providers: [InsuranceScenariosService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class InternationalBusinessQuoteComponent implements OnInit {
@@ -88,7 +90,8 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   availableProducts: { value: string; label: string; }[] = [];
   selectedProductType: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    @Inject(InsuranceScenariosService) readonly insuranceService: InsuranceScenariosService) {}
 
   ngOnInit(): void {
     console.log('Entrando en InternationalBusinessQuoteComponent');
@@ -108,15 +111,12 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   onWhoToInsureChange(event: any) {
     const selectedValue = event.detail.value;
 
-    // Restablece a un solo asegurado (Titular)
     this.insured = ['Titular'];
 
-    // Si el valor seleccionado es "family", agrega una persona adicional
     if (selectedValue === 'family') {
       this.addSlide();
     }
 
-    // Muestra el botón si se selecciona "family"
     this.showAddSlideButton = selectedValue === 'family';
   }
 
@@ -133,10 +133,10 @@ export class InternationalBusinessQuoteComponent implements OnInit {
     this.insured.push(`Asegurado`);
 
     setTimeout(() => {
-      console.log('Entré al setTimeout');
+      //console.log('Entré al setTimeout');
 
       const newSlideElement = document.querySelector(`swiper-slide:last-child`);
-      console.log('Esta es el nuevo slide: '+newSlideElement?.outerHTML);
+      //console.log('Esta es el nuevo slide: '+newSlideElement?.outerHTML);
 
       if (newSlideElement) {
         (newSlideElement as HTMLElement).focus();

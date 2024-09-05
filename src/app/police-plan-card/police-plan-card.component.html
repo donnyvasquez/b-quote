@@ -13,6 +13,7 @@
         <ion-checkbox
           #selectPolicePlanCard
           mode="md"
+          *ngIf="(!this.insuranceScenariosService.isRenewal() && !this.insuranceScenariosService.isPmiEcuador())"
           id="select-police-plan-card-{{planId}}"
           (ionChange)="toastMessage = $event.detail.checked ? 'Has seleccionado el plan' : 'Quitaste el plan'; toast.present(); onCheckboxChange($event)">
           Comparar

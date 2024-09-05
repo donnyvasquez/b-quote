@@ -1,17 +1,19 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
 import { PolicePlanCardComponent } from '../police-plan-card/police-plan-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { BupaIonRadioComponent } from "../bupa-ion-radio/bupa-ion-radio.component";
+import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-international-business-plans',
   templateUrl: './international-business-plans.component.html',
   styleUrls: ['./international-business-plans.component.scss'],
   standalone: true,
-  imports: [ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule, BupaIonRadioComponent],
+  imports: [RouterModule, ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule, BupaIonRadioComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InternationalBusinessPlansComponent  implements OnInit {
@@ -199,12 +201,42 @@ export class InternationalBusinessPlansComponent  implements OnInit {
       ]
     }
   ];
-  moreSelectedOption: string | undefined = undefined;
+  defaultOptionsValue!: string | undefined;
+  moreSelectedOption: string | undefined = this.defaultOptionsValue;
+  selectedValue!: string;
 
-  constructor() {}
+  constructor(
+    readonly insuranceScenariosService: InsuranceScenariosService
+  ) {}
+
+  replacePlanTitles(plans: any[], newTitles: string[]): any[] {
+    return plans.map((plan, index) => ({
+      ...plan,
+      planTitle: newTitles[index] || plan.planTitle // Si no hay nuevo título, mantener el original
+    }));
+  }
 
   ngOnInit() {
-    this.selectedCount = 0;
+    this.defaultOptionsValue = undefined;
+    this.moreSelectedOption = undefined;
+    this.loadData();
+  }
+
+  loadData() {
+    if (this.insuranceScenariosService.isPmiEcuador()) {
+      const newTitles1 = [
+        'Módulo hospitalario Optim@ - <span class="ecuador-base">Base</span>',
+        'Módulo hospitalario Optim@ - <span class="ecuador-plus">Plus</span>',
+        'Módulo hospitalario Optim@ - <span class="ecuador-completa">Completa</span>'
+      ];
+      const newTitles2 = [
+        'Módulo hospitalario Suprem@ - <span class="ecuador-base">Base</span>',
+        'Módulo hospitalario Suprem@ - <span class="ecuador-plus">Plus</span>',
+        'Módulo hospitalario Suprem@ - <span class="ecuador-completa">Completa</span>'
+      ];
+      this.morePlans1 = this.replacePlanTitles(this.morePlans1, newTitles1);
+      this.morePlans2 = this.replacePlanTitles(this.morePlans1, newTitles2);
+    }
   }
 
   onPlanSelected(isChecked: boolean) {
@@ -219,15 +251,17 @@ export class InternationalBusinessPlansComponent  implements OnInit {
   onMoreOptionSelected(option: string) {
     this.moreSelectedOption = option;
 
-    // Retardar el scroll para asegurarse de que el contenido esté visible
-    setTimeout(() => {
-      this.scrollToContent();
-    }, 250);  // Puedes ajustar el tiempo si es necesario
+    if (!this.insuranceScenariosService.isPmiEcuador()) {
+      // Scroll cuando no es PMI Ecuador
+      setTimeout(() => {
+        this.scrollToContent();
+      }, 250);
+    }
   }
 
   get morePlansShowed() {
     if (!this.moreSelectedOption) {
-      return [];  // Retorna un arreglo vacío si no se ha seleccionado ninguna opción
+      return [];  // Retorna un arreglo vacÃ­o si no se ha seleccionado ninguna opciÃ³n
     }
     return this.moreSelectedOption === '1' ? this.morePlans1 : this.morePlans2;
   }
