@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 
 @Component({
   selector: 'app-bupa-ion-radio',
@@ -11,15 +12,26 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./bupa-ion-radio.component.scss']
 })
 
-export class BupaIonRadioComponent {
+export class BupaIonRadioComponent implements OnInit {
   @Output() optionSelected = new EventEmitter<string>();
 
-  @Input() options: { label: string; description: string; value: string;}[]  | undefined;
+  @Input() options: { label: string; description: string; value: string; id?: string;}[]  | undefined;
   @Input() groupDirection: 'row' | 'column' = 'row';
   @Input() groupLabel: string = '';
   @Input() singleLabel: string = 'Opción única';
   @Input() singleDescription: string = 'Descripción única';
   selectedValue: any;
+
+  constructor(
+    readonly insuranceScenariosService: InsuranceScenariosService
+  ){}
+  ngOnInit(){
+
+    if (this.insuranceScenariosService.isPmiEcuador()) {
+      this.selectedValue = '1';
+      this.optionSelected.emit(this.selectedValue)
+    }
+  }
 
   getColumnSize(): string {
     return this.groupDirection === 'column' ? '12' : '6';

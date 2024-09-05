@@ -28,32 +28,46 @@
         </ion-col>
       </ion-row>
     </section>
-    <ion-row>
-      <ion-col *ngFor="let plan of plans" size="12" sizeMd="4">
-        <app-police-plan-card
-          [planId]="plan.planId"
-          [planTitle]="plan.planTitle"
-          [planSubtitle]="plan.planSubtitle"
-          [planDescription]="plan.planDescription"
-          [planPrice]="plan.planPrice"
-          [planMountLimit]="plan.planMountLimit"
-          [planCoverage]="plan.planCoverage"
-          [planPaymentPlan]="plan.planPaymentPlan"
-          [deductibleMount]="plan.deductibleMount"
-          [promoPercents]="plan.promoPercents"
-          [promoPlanPaymentPlan]="plan.promoPlanPaymentPlan"
-          [validDate]="plan.validDate"
-          [promoPlanPrice]="plan.promoPlanPrice"
-          [aditionalCoverageOptions]="plan.aditionalCoverageOptions"
-          (planSelected)="onPlanSelected($event)">
-        </app-police-plan-card>
-      </ion-col>
-    </ion-row>
-    <section #moreOptionsSection>
-      <ion-row class="ion-text-center">
+    <section *ngIf="insuranceScenariosService.isNewBusinessCustomer()
+      || insuranceScenariosService.isNewBusinessAgent()
+      || insuranceScenariosService.isRenewal()">
+      <ion-row>
+        <ion-col *ngFor="let plan of plans" size="12" sizeMd="4">
+          <app-police-plan-card
+            [planId]="plan.planId"
+            [planTitle]="plan.planTitle"
+            [planSubtitle]="plan.planSubtitle"
+            [planDescription]="plan.planDescription"
+            [planPrice]="plan.planPrice"
+            [planMountLimit]="plan.planMountLimit"
+            [planCoverage]="plan.planCoverage"
+            [planPaymentPlan]="plan.planPaymentPlan"
+            [deductibleMount]="plan.deductibleMount"
+            [promoPercents]="plan.promoPercents"
+            [promoPlanPaymentPlan]="plan.promoPlanPaymentPlan"
+            [validDate]="plan.validDate"
+            [promoPlanPrice]="plan.promoPlanPrice"
+            [aditionalCoverageOptions]="plan.aditionalCoverageOptions"
+            (planSelected)="onPlanSelected($event)">
+          </app-police-plan-card>
+        </ion-col>
+      </ion-row>
+    </section>
+    <section #moreOptionsSection
+      *ngIf="insuranceScenariosService.isNewBusinessCustomer()
+      || insuranceScenariosService.isPmiEcuador()
+      || insuranceScenariosService.isRenewal()">
+      <ion-row class="ion-text-center" *ngIf="!insuranceScenariosService.isPmiEcuador()">
         <ion-col size="12">
           <hr class="ion-margin">
           <h2>¿Necesitas más opciones?</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-text-center" *ngIf="insuranceScenariosService.isPmiEcuador()">
+        <ion-col size="12">
+          <p>Tu producto consiste en 2 opciones de coberturas, Optim&#64; y Suprem&#64;
+            y en cada una puedes escoger el módulo hospitalario que mas te convenga,
+            consulta <a [routerLink]="['/home']">beneficios completos aquí</a>.</p>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -61,7 +75,7 @@
           <ion-row>
             <ion-col size="12">
               <span #moreOptionsAnchor></span>
-              <app-bupa-ion-radio
+              <app-bupa-ion-radio #moreOptions
                 [groupDirection]="'column'"
                 [groupLabel]="'Seguros Internacionales Premium'"
                 [options]="[
@@ -77,7 +91,7 @@
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <div #moreOptionsFilter *ngIf="this.moreSelectedOption === '1'">
+          <div #moreOptionsFilter *ngIf="(this.moreSelectedOption === '1' && !this.insuranceScenariosService.isPmiEcuador())">
             <p class="ion-text-center">Escoge entre estas opciones y te mostraremos los productos que se adaptan a tus necesidades</p>
             <ion-row class="ion-no-padding">
               <ion-col>
