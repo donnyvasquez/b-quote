@@ -10,15 +10,14 @@ import { InsuranceScenariosService } from '../services/insurance-scenarios.servi
 SwiperCore.use([]);
 
 @Component({
-  selector: 'app-international-business-quote',
-  templateUrl: './international-business-quote.component.html',
-  styleUrls: ['./international-business-quote.component.scss'],
+  selector: 'app-business-quote',
+  templateUrl: './business-quote.component.html',
+  styleUrls: ['./business-quote.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule],
-  providers: [InsuranceScenariosService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class InternationalBusinessQuoteComponent implements OnInit {
+export class BusinessQuoteComponent implements OnInit {
   @ViewChild('swiper') swiper: any;
 
   slideConfig = {
@@ -89,12 +88,14 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   selectedRelationship: string = 'child';
   availableProducts: { value: string; label: string; }[] = [];
   selectedProductType: string | null = null;
+  policeCase!: string | undefined;
 
   constructor(private router: Router,
-    @Inject(InsuranceScenariosService) readonly insuranceService: InsuranceScenariosService) {}
+   readonly insuranceScenariosService: InsuranceScenariosService) {}
 
   ngOnInit(): void {
-    console.log('Entrando en InternationalBusinessQuoteComponent');
+    this.policeCase = this.insuranceScenariosService.getPoliceCase();
+    console.log(`International Business Quote component loaded with policeCase: ${this.policeCase}`);
   }
 
   onProductTypeChange(event: any) {
@@ -166,6 +167,6 @@ export class InternationalBusinessQuoteComponent implements OnInit {
   }
 
   navigateToPlans() {
-    this.router.navigate(['/international-business-plans']);
+    this.router.navigate(['/business-plans']);
   }
 }

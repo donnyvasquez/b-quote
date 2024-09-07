@@ -11,11 +11,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'international-business-quote',
-    loadComponent: () => import('./international-business-quote/international-business-quote.component').then((m) => m.InternationalBusinessQuoteComponent),
+    path: 'business-quote',
+    loadComponent: () => import('./business-quote/business-quote.component').then((m) => m.BusinessQuoteComponent),
   },
   {
-    path: 'international-business-plans',
-    loadComponent: () => import('./international-business-plans/international-business-plans.component').then((m) => m.InternationalBusinessPlansComponent),
+    path: 'business-plans',
+    loadComponent: () => import('./business-plans/business-plans.component').then((m) => m.BusinessPlansComponent),
   },
 ];

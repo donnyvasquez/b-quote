@@ -15,7 +15,7 @@ register();
 })
 export class AppComponent {
   constructor() {
-    // Registrar todos los íconos disponibles
+    // Registrar todos los Ã­conos disponibles
     const icons = Object.keys(allIcons).reduce((iconsObj, iconName) => {
       iconsObj[iconName] = (allIcons as any)[iconName];
       return iconsObj;

@@ -1,11 +1,11 @@
-<ion-header mode="ios" *ngIf="1 > 0">
+<ion-header *ngIf="1 > 0">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
 
     <ion-title>
-      International business quote
+      International business quote {{'usuario: '+this.policeCase|json}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,7 +21,7 @@
         </ion-select>
       </ion-col>
 
-      <ion-col size="12" [sizeMd]="6" sizeLg="3" *ngIf="!insuranceService.isPmiEcuador()">
+      <ion-col size="12" [sizeMd]="6" sizeLg="3" *ngIf="!insuranceScenariosService.isPmiEcuador()">
         <ion-select  mode="md" #countrySelect label="Selecciona el país" label-placement="floating" fill="outline">
           <ion-select-option *ngFor="let option of countryOptions" [value]="option.value">{{ option.label }}</ion-select-option>
         </ion-select>

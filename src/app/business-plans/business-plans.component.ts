@@ -9,14 +9,14 @@ import { InsuranceScenariosService } from '../services/insurance-scenarios.servi
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-international-business-plans',
-  templateUrl: './international-business-plans.component.html',
-  styleUrls: ['./international-business-plans.component.scss'],
+  selector: 'app-business-plans',
+  templateUrl: './business-plans.component.html',
+  styleUrls: ['./business-plans.component.scss'],
   standalone: true,
   imports: [RouterModule, ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule, BupaIonRadioComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class InternationalBusinessPlansComponent  implements OnInit {
+export class BusinessPlansComponent  implements OnInit {
   @ViewChild('moreOptionsAnchor') moreOptionsAnchor: ElementRef | undefined;
   public selectedCount: number = 0;
   public plans = [
@@ -261,7 +261,7 @@ export class InternationalBusinessPlansComponent  implements OnInit {
 
   get morePlansShowed() {
     if (!this.moreSelectedOption) {
-      return [];  // Retorna un arreglo vacÃ­o si no se ha seleccionado ninguna opciÃ³n
+      return [];  // Retorna un arreglo vací­o si no se ha seleccionado ninguna opción
     }
     return this.moreSelectedOption === '1' ? this.morePlans1 : this.morePlans2;
   }

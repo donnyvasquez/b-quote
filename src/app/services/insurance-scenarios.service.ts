@@ -4,11 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class InsuranceScenariosService {
-  private policeCase: string = 'customer';
+  private policeCase!: string;
 
   // Metodo para establecer el valor de policeCase
   setPoliceCase(value: string): void {
     this.policeCase = value;
+  }
+
+  getPoliceCase(): string {
+    return this.policeCase;
   }
 
   // Metodos que devuelven true o false segun el valor de policeCase

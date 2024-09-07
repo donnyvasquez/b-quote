@@ -1,6 +1,8 @@
 ion-modal{
-  --width: 720px;
-  --height: 90%;
+  @media (min-width: 768px) {
+    --width: 720px;
+    --height: 90%;
+}
   ion-header{
     ion-icon {
       color: var(--primary-color);
