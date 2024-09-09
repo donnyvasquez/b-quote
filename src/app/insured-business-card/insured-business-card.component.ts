@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -10,7 +10,7 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [CommonModule, FormsModule,IonicModule]
 })
-export class InsuredBusinessCardComponent {
+export class InsuredBusinessCardComponent implements OnInit  {
   @Input() persona: any;
   @Input() idNumber!: number;
   @Input() insuredLength!: number;
@@ -20,7 +20,10 @@ export class InsuredBusinessCardComponent {
 
   @Output() birthDateChange = new EventEmitter<any>();
   @Output() removeSlide = new EventEmitter<number>();
+  ngOnInit() {
+    console.log(JSON.stringify(this.idNumber));
 
+  }
   onBirthDateChange(event: any) {
     this.birthDateChange.emit({ event, index: this.idNumber });
   }

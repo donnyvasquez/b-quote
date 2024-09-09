@@ -38,7 +38,7 @@ export class BusinessQuoteComponent implements OnInit {
   };
 
   public showAddSlideButton = false;
-  public insured = ['Titular'];
+  public insured = ['Titular','Asegurado'];
 
   whoToInsureOptions = [
     { value: 'individual', label: 'Una persona' },

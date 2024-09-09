@@ -58,7 +58,7 @@
             <swiper-slide tabindex="0" *ngFor="let persona of insured; let i = index" class="user-data-swiper-slide"
               [ngClass]="{'user-data-swiper-slide-titular': i===0}">
               <swiper-slide *ngFor="let persona of insured; let i = index" class="user-data-swiper-slide">
-                <app-insured-card [persona]="persona" [index]="i" [insuredLength]="insured.length"
+                <app-insured-card [persona]="persona" [idNumber]="i" [insuredLength]="insured.length"
                   [selectedBirthDate]="selectedBirthDate[i]" [relationshipOptions]="relationshipOptions"
                   (birthDateChange)="onBirthDateChange($event, i)" (removeSlide)="removeSlide(i)">
                 </app-insured-card>
