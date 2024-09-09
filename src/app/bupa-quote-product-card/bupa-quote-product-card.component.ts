@@ -7,13 +7,13 @@ import { ModalSendBusinessPlanComponent } from '../modal-send-business-plan/moda
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 
 @Component({
-  selector: 'app-police-plan-card',
-  templateUrl: './police-plan-card.component.html',
-  styleUrls: ['./police-plan-card.component.scss'],
+  selector: 'app-bupa-quote-product-card',
+  templateUrl: './bupa-quote-product-card.component.html',
+  styleUrls: ['./bupa-quote-product-card.component.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent]
 })
-export class PolicePlanCardComponent implements OnInit {
+export class BupaQuoteProductCardComponent implements OnInit {
   modalTemplate!: TemplateRef<any>;
   @Input() planId!: string;
   @Input() planTitle: string = '';

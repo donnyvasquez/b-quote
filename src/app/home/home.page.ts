@@ -3,7 +3,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
-import { PolicePlanCardComponent } from '../police-plan-card/police-plan-card.component';
+import { BupaQuoteProductCardComponent } from '../bupa-quote-product-card/bupa-quote-product-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 
@@ -12,7 +12,7 @@ import { InsuranceScenariosService } from '../services/insurance-scenarios.servi
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [RouterModule,ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule],
+  imports: [RouterModule,ButtonActionsComponent, BupaQuoteProductCardComponent, IonicModule, StripHtmlPipe, CommonModule],
 })
 export class HomePage implements OnInit {
 

@@ -2,7 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild, After
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
-import { PolicePlanCardComponent } from '../police-plan-card/police-plan-card.component';
+import { BupaQuoteProductCardComponent } from '../bupa-quote-product-card/bupa-quote-product-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { BupaIonRadioComponent } from "../bupa-ion-radio/bupa-ion-radio.component";
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './business-plans.component.html',
   styleUrls: ['./business-plans.component.scss'],
   standalone: true,
-  imports: [RouterModule, ButtonActionsComponent, PolicePlanCardComponent, IonicModule, StripHtmlPipe, CommonModule, BupaIonRadioComponent],
+  imports: [RouterModule, ButtonActionsComponent, BupaQuoteProductCardComponent, IonicModule, StripHtmlPipe, CommonModule, BupaIonRadioComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BusinessPlansComponent  implements OnInit {
