@@ -1,0 +1,51 @@
+<ion-card mode="ios" color="primary" class="user-data-swiper-card ion-no-margin">
+  <ion-card-header class="user-data-swiper-card-header">
+    <ion-card-title>
+      <div class="ion-display-flex ion-justify-content-start ion-align-items-center">
+        <ion-badge mode="ios" color="light">{{ idNumber + 1 }}</ion-badge>
+        <span class="ion-padding-horizontal">{{ persona }}</span>
+      </div>
+    </ion-card-title>
+
+    <!-- Condicional para mostrar el botón de eliminar solo si el @Input removeCard es true -->
+    <ion-button *ngIf="removeCard && insuredLength > 2 && idNumber > 0" color="light" fill="clear"
+      (click)="onRemoveSlide(idNumber)" class="user-data-swiper-card-header-close-button">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-card-header>
+
+  <ion-card-content class="ion-padding-top">
+    <ion-row>
+      <ion-col size="12"><ion-label>Fecha de nacimiento</ion-label></ion-col>
+      <ion-col size="12">
+        <ion-datetime-button #birthdayButton_{{idNumber}} id="birthdayButton_{{idNumber}}" mode="ios"
+          datetime="birthdate-persona-{{idNumber}}">
+          <ion-item class="ion-no-padding" lines="none" slot="date-target">
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
+            <span class="formatedDate">{{ selectedBirthDate ? selectedBirthDate : 'Selecciona una fecha' }}</span>
+          </ion-item>
+        </ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime [showDefaultButtons]="true" doneText="Confirmar" #birthday_{{idNumber}} required
+              presentation="date"
+              [formatOptions]="{ date: {year: 'numeric', weekday: 'short', month: 'short', day: '2-digit'}}"
+              id="birthdate-persona-{{idNumber}}" (ionChange)="onBirthDateChange($event)">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="idNumber > 0">
+      <ion-col size="12"><ion-label>Parentesco</ion-label></ion-col>
+      <ion-col size="12">
+        <ion-select mode="md" #relationshipSelect aria-label="Select Relationship" label-placement="stacked"
+          fill="outline">
+          <ion-select-option *ngFor="let option of relationshipOptions" [value]="option.value">{{ option.label
+            }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
