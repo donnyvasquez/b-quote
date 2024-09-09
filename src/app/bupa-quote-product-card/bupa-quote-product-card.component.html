@@ -4,7 +4,7 @@
     <ion-row class="ion-justify-content-between">
       <ion-col size="auto" class="text-start ion-no-padding">
         <!-- Botón de toggle visible solo en móviles -->
-        <ion-button class="mobile-only ion-no-padding" fill="clear" slot="" (click)="toggleCardContent()">
+        <ion-button size="large" class="mobile-only ion-no-padding" fill="clear" slot="" (click)="toggleCardContent()">
           <ion-icon [name]="isCardContentVisible ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
         </ion-button>
       </ion-col>
@@ -20,16 +20,16 @@
         </ion-checkbox>
       </ion-col>
     </ion-row>
-    <ion-card-subtitle hidden mode="ios">{{ planSubtitle }}</ion-card-subtitle>
-    <hr *ngIf="planTitle" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
-  </ion-card-header>
-
+    </ion-card-header>
   <ion-card-content mode="ios" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
-    <div *ngIf="planMountLimit || planCoverage" class="plan-mount plan-coverage">
-      <p *ngIf="planMountLimit">{{planMountLimit}}</p>
-      <p *ngIf="planCoverage">{{planCoverage}}</p>
-      <hr>
-    </div>
+
+    <hr *ngIf="planTitle" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
+    <app-bupa-quote-product-card-limits
+    [planMountLimit]="planMountLimit"
+    [planCoverage]="planCoverage"
+    >
+    </app-bupa-quote-product-card-limits>
+
 
     <div class="plan-deductible-mount" *ngIf="deductibleMount.length > 0">
       <ion-label class="d-block">Deducibles: {{deductibleMount.length}} <ion-icon color="primary" name="information-circle-outline"></ion-icon></ion-label>

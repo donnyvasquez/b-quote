@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from "../pipes/strip-html.pipe";
 import { ModalSendBusinessPlanComponent } from '../modal-send-business-plan/modal-send-business-plan.component';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
+import { BupaQuoteProductCardLimitsComponent } from '../bupa-quote-product-card-limits/bupa-quote-product-card-limits.component';
 
 @Component({
   selector: 'app-bupa-quote-product-card',
   templateUrl: './bupa-quote-product-card.component.html',
   styleUrls: ['./bupa-quote-product-card.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent]
+  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent]
 })
 export class BupaQuoteProductCardComponent implements OnInit {
   modalTemplate!: TemplateRef<any>;
