@@ -35,18 +35,25 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
-:host{
-  --ion-color-primary: #0079C8;
-  --san-color-primary: #0079C8;
-  --san-secondary-25: #0652AE;
-  --san-grey-175: #4E5357;
-}
-$primary : --ion-color-primary;
+@import 'src/theme/variables.scss';
+
 *::-webkit-scrollbar {
   width: auto;
 }
 *::-webkit-scrollbar-thumb {
-  background: $primary;
+  background: var(--ion-color-primary);
+}
+.san-color-primary{
+  color: var(--san-color-primary);
+  --color: var(--san-color-primary);
+}
+.san-color-secondary-25{
+  color: var(--san-color-secondary-25);
+  --color: var(--san-color-secondary-25);
+}
+.san-grey-175{
+  color: var(--san-grey-175);
+  --color: var(--san-grey-175);
 }
 .ion-background-primary{
   background-color: var(--ion-color-primary);
@@ -61,8 +68,8 @@ $primary : --ion-color-primary;
   --color: var(--san-color-primary);
 }
 .san-color-secondary-25{
-  color: var(--san-secondary-25);
-  --color: var(--san-secondary-25);
+  color: var(--san-color-secondary-25);
+  --color: var(--san-color-secondary-25);
 }
 .san-grey-175{
   color: var(--san-grey-175);
