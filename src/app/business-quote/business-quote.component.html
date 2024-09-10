@@ -15,7 +15,7 @@
     <h1 class="police-quote-title">International business quote</h1>
     <h2 class="calculate-insurance-price-subtitle">Calculate your insurance price</h2>
     <ion-row class="police-quote-filter">
-      <ion-col size="12" [sizeMd]="6" sizeLg="3">
+      <ion-col [sizeMd]="6" sizeLg="3">
         <ion-select (ionChange)="onWhoToInsureChange($event)" mode="md" value="individual" #whoToInsureSelect
           label="¿A quién quieres asegurar?" label-placement="floating" fill="outline">
           <ion-select-option *ngFor="let option of whoToInsureOptions" [value]="option.value">{{ option.label
@@ -23,7 +23,7 @@
         </ion-select>
       </ion-col>
 
-      <ion-col size="12" [sizeMd]="6" sizeLg="3" *ngIf="!insuranceScenariosService.isPmiEcuador()">
+      <ion-col [sizeMd]="6" sizeLg="3" *ngIf="!insuranceScenariosService.isPmiEcuador()">
         <ion-select mode="md" #countrySelect label="Selecciona el país" label-placement="floating" fill="outline">
           <ion-select-option *ngFor="let option of countryOptions" [value]="option.value">{{ option.label
             }}</ion-select-option>
@@ -48,35 +48,30 @@
       </ion-col>
     </ion-row>
 
-    <h2 class="ion-text-center user-data-title">Datos del asegurado</h2>
+    <h2 class="ion-text-center insured-data-title">Datos del asegurado</h2>
     <section class="ion-justify-content-center">
-      <ion-row class="ion-justify-content-center ion-nowrap ">
-        <ion-col>
-          <swiper-container #swiper [grabCursor]="slideConfig.grabCursor" [centeredSlides]="insured.length <= 2"
-            [effect]="slideConfig.effect" [slidesPerView]="slideConfig.slidesPerView"
-            [spaceBetween]="slideConfig.spaceBetween" [loop]="slideConfig.loop">
-            <swiper-slide tabindex="0" *ngFor="let persona of insured; let i = index" class="user-data-swiper-slide"
-              [ngClass]="{'user-data-swiper-slide-titular': i===0}">
-              <swiper-slide *ngFor="let persona of insured; let i = index" class="user-data-swiper-slide">
-                <app-insured-card [persona]="persona" [idNumber]="i" [insuredLength]="insured.length"
-                  [selectedBirthDate]="selectedBirthDate[i]" [relationshipOptions]="relationshipOptions"
-                  (birthDateChange)="onBirthDateChange($event, i)" (removeSlide)="removeSlide(i)">
-                </app-insured-card>
-              </swiper-slide>
+      <ion-row class="ion-justify-content-end">
+        <ion-col size="auto" *ngIf="showAddSlideButton">
 
-            </swiper-slide>
-          </swiper-container>
+          <ion-button (click)="addSlide()" mode="ios">
+            <ion-icon name="add"></ion-icon>
+            <ion-label >Añadir asegurado</ion-label>
+          </ion-button>
+
         </ion-col>
       </ion-row>
-      <ion-row class="ion-justify-content-end">
-        <ion-col size="auto" *ngIf="showAddSlideButton"
-          class="ion-no-padding ion-text-center ion-display-inline-flex ion-flex-column">
-
-          <ion-button (click)="addSlide()" mode="ios" shape="round" class="round-button ion-padding">
-            <ion-icon slot="icon-only" name="add"></ion-icon>
-          </ion-button>
-          <ion-label color="secondary">Añadir <br> asegurado</ion-label>
-
+      <ion-row class="ion-justify-content-center ion-nowrap ">
+        <ion-col>
+          <app-bupa-insured-carousel
+            [insured]="insured"
+            [selectedBirthDate]="selectedBirthDate"
+            [relationshipOptions]="relationshipOptions"
+            [showRemoveButton]="showRemoveButton"
+            [swiperConfig]="customSwiperConfig"
+            (addSlide)="addSlide()"
+            (removeSlide)="removeSlide($event)"
+            (birthDateChange)="onBirthDateChange($event)"
+          ></app-bupa-insured-carousel>
         </ion-col>
       </ion-row>
     </section>

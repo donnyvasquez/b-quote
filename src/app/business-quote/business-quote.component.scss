@@ -1,58 +1,12 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-ion-card {
-  --box-shadow: none;
-  ion-select,
-  ion-input {
-    --padding-start: 1rem;
-    --padding-end: 1rem;
-    --background: white;
-    --border-radius: 5px;
-    --border-width: 0px;
-    --box-shadow: none;
-  }
-
-  /* Para los elementos de ion-select */
-  ion-select {
-    --color: #333; /* Ajusta el color si es necesario */
-    color: #333;
-    --placeholder-color: #666; /* Cambia el color del placeholder */
-  }
-
-  /* Para los elementos de ion-input */
-  ion-input {
-    --color: #333;
-    --placeholder-color: #666;
-    --padding-start: 16px;
-    --padding-end: 16px;
-  }
-}
-
-.user-data-swiper-slide{
-  width: 296px;
-  .user-data-swiper-card-header{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    background-color: #0D1846;
-    ion-badge{
-      aspect-ratio: 1;
-      border-radius: 50%;
-      align-items: center;
-      align-content: center;
-    }
-  }
-  ion-card-content{
-    background-color: #0079C8;
-  }
-}
-
-.user-data-swiper-slide-titular{
-  .user-data-swiper-card-header{
+.insured-data-slide-titular{
+  display: inline-block;
+  ::ng-deep .insured-data-card-header{
   background-color: #0079C8;
   }
-  ion-card-content{
+  ::ng-deep ion-card-content{
     background-color: #0D1846;
   }
 }
@@ -61,16 +15,4 @@ ion-card {
   --border-radius: 50%;
 }
 
-ion-datetime-button{
-  &::part(native) {
-    width: 100%;
-    padding-block: 0;
-    padding-inline-end: 0;
-  }
-  ion-item{
-    --background: transparent;
-    .formatedDate::first-letter{
-      text-transform: capitalize;
-    }
-  }
-}
+

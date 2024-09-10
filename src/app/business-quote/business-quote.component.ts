@@ -1,44 +1,44 @@
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
-import SwiperCore from 'swiper';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
-
-SwiperCore.use([]);
+import { BupaInsuredCarouselComponent } from '../bupa-insured-carousel/bupa-insured-carousel.component';
 
 @Component({
   selector: 'app-business-quote',
   templateUrl: './business-quote.component.html',
   styleUrls: ['./business-quote.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, BupaInsuredCarouselComponent],
 })
 export class BusinessQuoteComponent implements OnInit {
-  @ViewChild('swiper') swiper: any;
+  //@ViewChild('swiper') swiper: any;
 
-  slideConfig = {
-    effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      coverflowEffect: {
-        rotate: 10,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: false,
-      },
-    slidesToScroll: 1,
-    loop: false,
-    spaceBetween: 30
-  };
+  customSwiperConfig = {
+    loop: true,
+    slidesPerView: 2, // Por defecto, muestra 1 diapositiva (para móviles)
+  spaceBetween: 30,
+
+  // Configuración de breakpoints
+  breakpoints: {
+    // Cuando el ancho de la ventana es >= 768px (tabletas)
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 40
+    },
+    // Cuando el ancho de la ventana es >= 1024px (computadoras de escritorio)
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 10
+    }
+  }
+  }
 
   public showAddSlideButton = false;
-  public insured = ['Titular','Asegurado'];
+  public insured!:string[];
 
   whoToInsureOptions = [
     { value: 'individual', label: 'Una persona' },
@@ -83,8 +83,8 @@ export class BusinessQuoteComponent implements OnInit {
       { value: 'bupa-essentiaql-1000', label: 'Bupa Essential 1000' },
     ],
   };
-
-  selectedBirthDate: string[] = [];
+  selectedBirthDate: any[] = [];
+  showRemoveButton: boolean = true;
   selectedRelationship: string = 'child';
   availableProducts: { value: string; label: string; }[] = [];
   selectedProductType: string | null = null;
@@ -96,6 +96,7 @@ export class BusinessQuoteComponent implements OnInit {
   ngOnInit(): void {
     this.policeCase = this.insuranceScenariosService.getPoliceCase();
     console.log(`International Business Quote component loaded with policeCase: ${this.policeCase}`);
+    this.insured = ['Titular'];
   }
 
   onProductTypeChange(event: any) {
@@ -149,12 +150,11 @@ export class BusinessQuoteComponent implements OnInit {
     this.insured.splice(index, 1);
   }
 
-  onBirthDateChange(event: any, index: number) {
-    // Obtén el valor formateado de la fecha seleccionada
-    const selectedDate = event.detail.value;
+  onBirthDateChange(event: any) {
+    const { event: dateEvent, index } = event;
+    const selectedDate = dateEvent.detail.value;
     const date = new Date(selectedDate);
 
-    // Formatea la fecha como "jueves, 5 de julio de 2024"
     const formattedDate = date.toLocaleDateString('es-ES', {
       weekday: 'long',
       day: 'numeric',
@@ -162,7 +162,6 @@ export class BusinessQuoteComponent implements OnInit {
       year: 'numeric'
     });
 
-    // Asigna la fecha seleccionada al array en la posición correspondiente
     this.selectedBirthDate[index] = formattedDate;
   }
 
