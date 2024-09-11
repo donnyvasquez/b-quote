@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, ViewChild, CUSTOM_ELEMENTS_SCHEMA, SimpleChanges, AfterViewInit, OnChanges, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, CUSTOM_ELEMENTS_SCHEMA, SimpleChanges, AfterViewInit, OnChanges, ElementRef, ViewChildren, QueryList, Renderer2 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { InsuredBusinessCardComponent } from '../insured-business-card/insured-business-card.component';
-import SwiperCore, { Swiper } from 'swiper';
-
-SwiperCore.use([]);
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-bupa-insured-carousel',
@@ -16,6 +14,7 @@ SwiperCore.use([]);
 })
 export class BupaInsuredCarouselComponent implements AfterViewInit, OnChanges {
   @ViewChild('swiper', { static: false }) swiperElement!: ElementRef;
+  @ViewChildren(InsuredBusinessCardComponent) slideComponents!: QueryList<InsuredBusinessCardComponent>;
   private swiper?: Swiper;
 
   @Input() insured: string[] = [];
@@ -30,17 +29,32 @@ export class BupaInsuredCarouselComponent implements AfterViewInit, OnChanges {
 
   defaultSwiperConfig = {
     grabCursor: true,
-    centeredSlides: true,
+    centeredSlides: false,
     slidesPerView: "auto",
     slidesToScroll: 1,
     loop: false,
     spaceBetween: 15
   };
 
+  constructor(private renderer: Renderer2) {}
+
   ngAfterViewInit() {
     console.warn(this.slideConfig);
-
     this.initSwiper();
+  }
+
+  focusLastSlide() {
+    setTimeout(() => {
+      const slides = this.slideComponents.toArray();
+      if (slides.length > 0) {
+        const lastSlide = slides[slides.length - 1];
+        lastSlide.focus();
+      }
+      if (this.swiper) {
+        this.swiper.update();
+        this.swiper.slideTo(this.insured.length - 1);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {

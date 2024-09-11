@@ -1,3 +1,14 @@
-swiper-slide{
-  width: 296px;
+swiper-container {
+  swiper-slide {
+    width: 296px;
+
+    &:first-child {
+      ::ng-deep .insured-data-card-header {
+        background-color: #0079C8;
+      }
+      ::ng-deep ion-card-content {
+        background-color: #0D1846;
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { IonicModule } from '@ionic/angular';
@@ -15,26 +15,12 @@ import { BupaInsuredCarouselComponent } from '../bupa-insured-carousel/bupa-insu
   imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, BupaInsuredCarouselComponent],
 })
 export class BusinessQuoteComponent implements OnInit {
-  //@ViewChild('swiper') swiper: any;
+  @ViewChild(BupaInsuredCarouselComponent) carouselComponent!: BupaInsuredCarouselComponent;
 
   customSwiperConfig = {
-    loop: true,
-    slidesPerView: 2, // Por defecto, muestra 1 diapositiva (para móviles)
-  spaceBetween: 30,
-
-  // Configuración de breakpoints
-  breakpoints: {
-    // Cuando el ancho de la ventana es >= 768px (tabletas)
-    768: {
-      slidesPerView: 2,
-      spaceBetween: 40
+    pagination: {
+      clickable: true,
     },
-    // Cuando el ancho de la ventana es >= 1024px (computadoras de escritorio)
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 10
-    }
-  }
   }
 
   public showAddSlideButton = false;
@@ -131,18 +117,12 @@ export class BusinessQuoteComponent implements OnInit {
   }
 
   addSlide() {
-    const newIndex = this.insured.length;
     this.insured.push(`Asegurado`);
 
     setTimeout(() => {
       //console.log('Entré al setTimeout');
+      this.carouselComponent.focusLastSlide();
 
-      const newSlideElement = document.querySelector(`swiper-slide:last-child`);
-      //console.log('Esta es el nuevo slide: '+newSlideElement?.outerHTML);
-
-      if (newSlideElement) {
-        (newSlideElement as HTMLElement).focus();
-      }
     }, 200);
   }
 

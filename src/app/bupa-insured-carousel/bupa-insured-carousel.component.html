@@ -1,8 +1,7 @@
 {{slideConfig|json}}
+<swiper-container #swiper [mousewheel]="true" [centeredSlides]="insured.length === 1" [grabCursor]="slideConfig.grabCursor" [effect]="slideConfig.effect" [slidesPerView]="slideConfig.slidesPerView" [spaceBetween]="slideConfig.spaceBetween" [loop]="slideConfig.loop" [ngClass]="{'swiper-pager-active':slideConfig.pagination}">
 
-<swiper-container #swiper [config]="slideConfig">
-
-  <swiper-slide [slidesPerView]="3" class="insured-data-slide" *ngFor="let persona of insured; let i = index" [ngClass]="{'insured-data-slide-titular': i === 0}">
+  <swiper-slide class="insured-data-slide" *ngFor="let persona of insured; let i = index">
     <app-insured-business-card
       [persona]="persona"
       [idNumber]="i"

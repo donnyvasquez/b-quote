@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -20,6 +20,9 @@ export class InsuredBusinessCardComponent implements OnInit  {
 
   @Output() birthDateChange = new EventEmitter<any>();
   @Output() removeCard = new EventEmitter<number>();
+
+  constructor(private el: ElementRef) {}
+
   ngOnInit() {
     console.log(JSON.stringify(this.idNumber));
     console.warn(JSON.stringify(this.persona));
@@ -30,6 +33,18 @@ export class InsuredBusinessCardComponent implements OnInit  {
 
   onRemoveCard(index: number) {
     this.removeCard.emit(index);
+  }
+
+  focus() {
+    // Desplaza suavemente el último swiper-slide al área visible
+    const lastSwiperSlide = this.el.nativeElement.querySelector('swiper-slide:nth-last-of-type(1) ion-card');
+
+    if (lastSwiperSlide) {
+      lastSwiperSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Luego, enfoca el elemento después de desplazarse
+      //setTimeout(() => {lastSwiperSlide.focus();}, 250);
+    }
   }
 
 }
