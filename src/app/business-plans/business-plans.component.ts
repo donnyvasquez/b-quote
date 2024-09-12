@@ -201,6 +201,20 @@ export class BusinessPlansComponent  implements OnInit {
       ]
     }
   ];
+
+  public deduciblePlans = [
+    {
+      name: 'Plan 1',
+      insideCountry: 'US$ 1,000',
+      outsideCountry: 'US$ 2,000',
+    },
+    {
+      name: 'Plan 2',
+      insideCountry: 'US$ 2,000',
+      outsideCountry: 'US$ 3,000',
+    },
+  ];
+
   defaultOptionsValue!: string | undefined;
   moreSelectedOption: string | undefined = this.defaultOptionsValue;
   selectedValue!: string;

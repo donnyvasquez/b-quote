@@ -30,116 +30,12 @@
     >
     </app-bupa-quote-product-card-limits>
 
-
-    <div class="plan-deductible-mount" *ngIf="deductibleMount.length > 0">
-      <ion-label class="d-block">Deducibles: {{deductibleMount.length}} <ion-icon color="primary" name="information-circle-outline"></ion-icon></ion-label>
-      <div *ngFor="let mount of deductibleMount">
-        <p class="ion-no-margin">{{ mount }}</p>
-      </div>
-      <div class="more-plan-deductible-options">
-        <ion-button id="open-more-plan-deductible-options-modal-{{planId}}" class="ion-no-margin ion-no-padding" fill="clear">
-          Otras opciones de deducible <ion-icon name="chevron-forward-outline"></ion-icon>
-        </ion-button>
-
-        <ion-modal
-        backdropDismiss="true"
-        [presentingElement]="presentingElement"
-        #modal
-        show-backdrop="true"
-        trigger="open-more-plan-deductible-options-modal-{{planId}}"
-        [canDismiss]="canDismiss"
-        >
-          <ng-template>
-            <ion-header>
-              <ion-toolbar>
-                <ion-title class="text-start">{{planTitle | stripHtml}}</ion-title>
-                <ion-buttons slot="end">
-                  <ion-button (click)="modal.dismiss()"><ion-icon name="close-outline"></ion-icon></ion-button>
-                </ion-buttons>
-              </ion-toolbar>
-            </ion-header>
-            <ion-content>
-              <ion-list>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 1: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 2: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 3: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 4: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Plan 5: <br>
-                      Dentro del País: US$ 1,000 <br>
-                      Fuera del País: US$ 2,000
-                    </ion-label>
-                  </ion-item>
-              </ion-list>
-
-            </ion-content>
-          </ng-template>
-        </ion-modal>
-      </div>
-      <hr>
-    </div>
+    <app-deductible-mount
+      [deductibleMount]="deductibleMount"
+      [planId]="planId"
+      [planTitle]="planTitle"
+      [deduciblePlans]="deduciblePlans"
+    ></app-deductible-mount>
 
     <div class="aditional-coverage-options" *ngIf="aditionalCoverageOptions.length > 0">
       <p class="ion-margin-bottom">Este producto ofrece opciones de cobertura adicionales.</p>
