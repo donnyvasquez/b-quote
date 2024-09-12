@@ -98,31 +98,12 @@ ion-checkbox {
 ion-button {
   --border-radius: 5px;
 }
-.plan-deductible-mount{
-  ion-button{
-    margin-top: 1rem;
-    min-height: 0;
-  }
-}
 ion-modal{
 
   @media (min-width: 768px){
     padding: 0;
   }
   --border-radius: 8px;
-}
-.aditional-coverage-options{
-  ion-item{
-    --border-radius: 4px;
-    --border-width: 1px;
-    margin-bottom: 16px;
-    --padding-top: var(--ion-padding, 8px);
-    --padding-bottom: var(--ion-padding, 8px);
-    --inner-border-width: 0px;
-    &:last-child {
-      margin-bottom: 0px;
-    }
-  }
 }
 .card-footer-content{
   margin-top:auto;
@@ -133,22 +114,6 @@ ion-modal{
   ion-accordion ion-item[slot='header']:hover {
     --background-hover: transparent;
     --color: var(--san-color-secondary-25);
-  }
-}
-::ng-deep .more-plan-deductible-options,
-ion-modal{
-  ion-card{
-    --inner-overflow: visible
-  }
-  ion-list{
-    ion-item{
-      --padding-start: 0px;
-      cursor: default;
-      --inner-padding-start: 1rem;
-      &:hover{
-        color: var(--ion-color-primary)
-      }
-    }
   }
 }
 

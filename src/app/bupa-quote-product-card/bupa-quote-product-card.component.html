@@ -37,17 +37,10 @@
       [deduciblePlans]="deduciblePlans"
     ></app-deductible-mount>
 
-    <div class="aditional-coverage-options" *ngIf="aditionalCoverageOptions.length > 0">
-      <p class="ion-margin-bottom">Este producto ofrece opciones de cobertura adicionales.</p>
-      <ion-list>
-        <ion-item *ngFor="let option of aditionalCoverageOptions" (click)="toggleCheckbox($event, checkbox)">
-          <ion-checkbox (ionCheck)="checkbox.checked" #checkbox mode="md" slot="start" color="primary"></ion-checkbox>
-          <ion-icon [name]="option.icon" slot="start"></ion-icon>
-          <span>{{ option.label }}</span>
-        </ion-item>
-      </ion-list>
-      <hr>
-    </div>
+    <app-aditional-coverage-options
+      [aditionalCoverageOptions]="aditionalCoverageOptions"
+      (toggleCheckboxEvent)="toggleCheckbox($event.event, $event.checkbox)">
+    </app-aditional-coverage-options>
 
     <div *ngIf="planPaymentPlan || planPrice" id="planPaymentPlanTemplate" class="plan-payment-plan">
       <p *ngIf="planPaymentPlan"><span [innerHtml]="planPaymentPlan"></span></p>

@@ -7,13 +7,14 @@ import { ModalSendBusinessPlanComponent } from '../modal-send-business-plan/moda
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 import { BupaQuoteProductCardLimitsComponent } from '../bupa-quote-product-card-limits/bupa-quote-product-card-limits.component';
 import { DeductibleMountComponent } from '../deductible-mount/deductible-mount.component';
+import { AditionalCoverageOptionsComponent } from '../aditional-coverage-options/aditional-coverage-options.component';
 
 @Component({
   selector: 'app-bupa-quote-product-card',
   templateUrl: './bupa-quote-product-card.component.html',
   styleUrls: ['./bupa-quote-product-card.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent, DeductibleMountComponent]
+  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent, DeductibleMountComponent, AditionalCoverageOptionsComponent]
 })
 export class BupaQuoteProductCardComponent implements OnInit {
   modalTemplate!: TemplateRef<any>;
