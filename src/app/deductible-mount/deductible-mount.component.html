@@ -36,7 +36,7 @@
 
         <ion-content>
           <ion-list>
-            <ion-item *ngFor="let plan of deduciblePlans" button tabindex="0">
+            <ion-item *ngFor="let plan of deduciblePlans" button tabindex="0" (click)="modal.dismiss()">
               <ion-label>
                 {{ plan.name }}: <br>
                 Dentro del País: {{ plan.insideCountry }} <br>
