@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, IonicModule]
 })
 export class BupaQuoteProductCardLimitsComponent  implements OnInit {
-  @Input() planMountLimit!: string;
-  @Input() planCoverage!: string
+  @Input() planMountLimit!: string[];
+  @Input() planCoverage!: string[];
   constructor() { }
 
   ngOnInit() {

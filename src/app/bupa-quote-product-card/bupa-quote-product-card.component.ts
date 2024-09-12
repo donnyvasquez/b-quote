@@ -21,8 +21,8 @@ export class BupaQuoteProductCardComponent implements OnInit {
   @Input() planSubtitle: string = '';
   @Input() planDescription: string = '';
   @Input() planPrice: number = 0;
-  @Input() planMountLimit: string = '';
-  @Input() planCoverage: string = '';
+  @Input() planMountLimit: string[] = [];
+  @Input() planCoverage: string[] = [];
   @Input() deductibleMount: string[] = [];
   @Input() aditionalCoverageOptions: { icon: string; label: string }[] = [];
   @Input() planPaymentPlan: string = '';

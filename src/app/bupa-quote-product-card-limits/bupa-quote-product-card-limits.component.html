@@ -1,5 +1,5 @@
 <div *ngIf="planMountLimit || planCoverage" class="plan-mount plan-coverage">
-  <p *ngIf="planMountLimit">{{planMountLimit}}</p>
-  <p *ngIf="planCoverage">{{planCoverage}}</p>
+  <p *ngFor="let limit of planMountLimit">{{ limit }}</p>
+  <p *ngFor="let coverage of planCoverage">{{ coverage }}</p>
   <hr>
 </div>
