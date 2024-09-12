@@ -178,3 +178,19 @@ ion-button:not(.btn-toogle){
 .ion-flex-column, ion-button.ion-flex-column *[part=native]{
   flex-direction: column;
 }
+
+// Utilities
+.ion-no-padding-top{
+  --padding-top: 0;
+  padding-top:0;
+}
+.ion-no-padding-bottom{
+  --padding-bottom: 0;
+  padding-bottom:0;
+}
+.ion-card-padding-horizontal{
+  -webkit-padding-start: 20px;
+    padding-inline-start: 20px;
+    -webkit-padding-end: 20px;
+    padding-inline-end: 20px;
+}
