@@ -31,6 +31,7 @@
     </app-bupa-quote-product-card-limits>
 
     <app-deductible-mount
+      [hidden]="deduciblePlans.length === 0"
       [deductibleMount]="deductibleMount"
       [planId]="planId"
       [planTitle]="planTitle"
@@ -38,6 +39,7 @@
     ></app-deductible-mount>
 
     <app-aditional-coverage-options
+      [hidden]="aditionalCoverageOptions.length === 0"
       [aditionalCoverageOptions]="aditionalCoverageOptions"
       (toggleCheckboxEvent)="toggleCheckbox($event.event, $event.checkbox)">
     </app-aditional-coverage-options>
