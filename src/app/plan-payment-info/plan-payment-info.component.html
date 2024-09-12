@@ -1,0 +1,22 @@
+<div *ngIf="planPaymentPlan || planPrice" id="planPaymentPlanTemplate"
+     [class.hiddenContentCard]="!isCardContentVisible"
+     [class.visibleContentCard]="isCardContentVisible"
+     class="plan-payment-plan ion-card-padding-horizontal">
+  <p *ngIf="planPaymentPlan" class="ion-no-margin">
+    <span [innerHtml]="planPaymentPlan"></span>
+  </p>
+  <h3 *ngIf="planPrice" class="plan-price san-secondary-25">{{ planPrice | currency }}</h3>
+</div>
+
+<div *ngIf="promoPercents" id="planPaymentPromo"
+     [class.hiddenContentCard]="!isCardContentVisible"
+     [class.visibleContentCard]="isCardContentVisible"
+     class="ion-padding ion-background-secondary plan-payment-promo">
+  <p><strong>Precio promocional: {{promoPercents}} de descuento</strong></p>
+  <p><span [innerHtml]="promoPlanPaymentPlan"></span></p>
+  <hr>
+  <p>{{validDate}}</p>
+  <h3 class="ion-text-center">
+    <sup class="text-overline">{{planPrice | currency}}</sup> {{promoPlanPrice | currency }}
+  </h3>
+</div>
