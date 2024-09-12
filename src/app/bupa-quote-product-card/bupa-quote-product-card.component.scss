@@ -1,3 +1,8 @@
+:host {
+  ::ng-deep ion-card p{
+    font-size: 1rem;
+  }
+}
 @media (max-width: 767px) {
   /* Definir clases para mostrar/ocultar */
   .hiddenContentCard{
@@ -86,13 +91,6 @@ ion-checkbox {
 }
 ion-button {
   --border-radius: 5px;
-}
-ion-modal{
-
-  @media (min-width: 768px){
-    padding: 0;
-  }
-  --border-radius: 8px;
 }
 .card-footer-content{
   margin-top:auto;

@@ -56,31 +56,11 @@
     [promoPlanPrice]="promoPlanPrice"
   ></app-plan-payment-info>
 
-  <ion-accordion-group [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible" class="featured-medical-benefits ion-padding-horizontal">
-    <ion-accordion value="first">
-      <ion-item slot="header">
-        <ion-label>Beneficios médicos destacados</ion-label>
-      </ion-item>
-      <div class="ion-padding ion-text-start" slot="content">
-        <p>Deducible anual por persona</p>
-        <p>Cobertura maternidad</p>
-        <p>Mejora de la cobertura de condiciones preexistentes a partir del mes 13</p>
-        <p>Tratamiento integral del cancer</p>
-        <p>Limite máximo por incapacida por año por poliza</p>
-        <p>Prima gratis para 2 niños de hasta 10 años.</p>
-      </div>
-    </ion-accordion>
-    <hr class="ion-no-margin">
-  </ion-accordion-group>
-
-  <ion-card-content class="card-footer-content ion-padding ion-text-center ion-margin-top" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
-    <ion-button class="ion-text-underline" fill="clear" expand="block">Más iformación</ion-button>
-    <ion-button id="open-modal-send-plan-{{planId}}" class="ion-text-underline" fill="clear" expand="block">Enviar cotización</ion-button>
-
-    <ion-button shape="solid" mode="ios" color="primary" (click)="selectPlan()">
-      Seleccionar Plan
-    </ion-button>
-  </ion-card-content>
+  <app-featured-benefits-accordion
+    *ngIf="featuredBenefits.length > 0"
+    [isCardContentVisible]="isCardContentVisible"
+    [featuredBenefits]="featuredBenefits"
+  ></app-featured-benefits-accordion>
 
 
   <div id="planPaymentPromoInContent" class="ion-padding plan-payment-promo-in-content mobile-only ion-no-padding-top" [class.hiddenContentCard]="isCardContentVisible" [class.visibleContentCard]="!isCardContentVisible">
@@ -95,4 +75,3 @@
     position="top">
   </ion-toast>
 </ion-card>
-<app-modal-send-business-plan planId="open-modal-send-plan-{{planId}}"></app-modal-send-business-plan>

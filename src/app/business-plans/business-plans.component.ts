@@ -218,6 +218,14 @@ export class BusinessPlansComponent  implements OnInit {
   defaultOptionsValue!: string | undefined;
   moreSelectedOption: string | undefined = this.defaultOptionsValue;
   selectedValue!: string;
+  public featuredBenefits  = [
+    'Deducible anual por persona',
+    'Cobertura maternidad',
+    'Mejora de la cobertura de condiciones preexistentes a partir del mes 13',
+    'Tratamiento integral del cancer',
+    'Limite máximo por incapacida por año por poliza',
+    'Prima gratis para 2 niños de hasta 10 años.'
+  ]
 
   constructor(
     readonly insuranceScenariosService: InsuranceScenariosService

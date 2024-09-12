@@ -9,6 +9,7 @@ import { BupaQuoteProductCardLimitsComponent } from '../bupa-quote-product-card-
 import { DeductibleMountComponent } from '../deductible-mount/deductible-mount.component';
 import { AditionalCoverageOptionsComponent } from '../aditional-coverage-options/aditional-coverage-options.component';
 import { PlanPaymentInfoComponent } from '../plan-payment-info/plan-payment-info.component';
+import { FeaturedBenefitsAccordionComponent } from '../featured-benefits-accordion/featured-benefits-accordion.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { PlanPaymentInfoComponent } from '../plan-payment-info/plan-payment-info
   templateUrl: './bupa-quote-product-card.component.html',
   styleUrls: ['./bupa-quote-product-card.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent, DeductibleMountComponent, AditionalCoverageOptionsComponent, PlanPaymentInfoComponent]
+  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent, DeductibleMountComponent, AditionalCoverageOptionsComponent, PlanPaymentInfoComponent, FeaturedBenefitsAccordionComponent]
 })
 export class BupaQuoteProductCardComponent implements OnInit {
   modalTemplate!: TemplateRef<any>;
@@ -35,6 +36,7 @@ export class BupaQuoteProductCardComponent implements OnInit {
   @Input() promoPlanPaymentPlan: string | undefined = '';
   @Input() validDate: string | undefined = '';
   @Input() promoPlanPrice: number | undefined = 0;
+  @Input() featuredBenefits!: string[];
   @Output() planSelected = new EventEmitter<boolean>();
 
   selectedCount: number = 0;
