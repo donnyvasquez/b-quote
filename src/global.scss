@@ -87,6 +87,8 @@ body{
 }
 hr{
   background: var(--ion-color-light-shade);
+  margin-block-end: 16px;
+  margin-block-start: 16px;
 }
 ion-backdrop {
   background: var(--ion-color-dark);
