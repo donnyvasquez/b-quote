@@ -40,7 +40,7 @@
     <ion-row *ngIf="idNumber > 0">
       <ion-col size="12"><ion-label>Parentesco</ion-label></ion-col>
       <ion-col size="12">
-        <ion-select mode="md" #relationshipSelect aria-label="Select Relationship" label-placement="stacked"
+        <ion-select mode="md" interface="popover" #relationshipSelect aria-label="Select Relationship" label-placement="stacked"
           fill="outline">
           <ion-select-option *ngFor="let option of relationshipOptions" [value]="option.value">{{ option.label
             }}</ion-select-option>

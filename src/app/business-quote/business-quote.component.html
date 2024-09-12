@@ -16,7 +16,7 @@
     <h2 class="calculate-insurance-price-subtitle">Calculate your insurance price</h2>
     <ion-row class="police-quote-filter">
       <ion-col [sizeMd]="6" sizeLg="3">
-        <ion-select (ionChange)="onWhoToInsureChange($event)" mode="md" value="individual" #whoToInsureSelect
+        <ion-select interface="popover" (ionChange)="onWhoToInsureChange($event)" mode="md" value="individual" #whoToInsureSelect
           label="¿A quién quieres asegurar?" label-placement="floating" fill="outline">
           <ion-select-option *ngFor="let option of whoToInsureOptions" [value]="option.value">{{ option.label
             }}</ion-select-option>
@@ -24,14 +24,14 @@
       </ion-col>
 
       <ion-col [sizeMd]="6" sizeLg="3" *ngIf="!insuranceScenariosService.isPmiEcuador()">
-        <ion-select mode="md" #countrySelect label="Selecciona el país" label-placement="floating" fill="outline">
+        <ion-select interface="popover" mode="md" #countrySelect label="Selecciona el país" label-placement="floating" fill="outline">
           <ion-select-option *ngFor="let option of countryOptions" [value]="option.value">{{ option.label
             }}</ion-select-option>
         </ion-select>
       </ion-col>
 
       <ion-col size="12" [sizeMd]="6" sizeLg="3">
-        <ion-select mode="md" #productTypeSelect
+        <ion-select interface="popover" mode="md" #productTypeSelect
           label="Selecciona el tipo de producto {{this.updateProductOptions|json}}"
           (ionChange)="onProductTypeChange($event)" label-placement="floating" fill="outline">
           <ion-select-option *ngFor="let option of productTypeOptions" [value]="option.value">{{ option.label
@@ -40,7 +40,7 @@
       </ion-col>
 
       <ion-col *ngIf="shouldShowProductSelect()" size="12" [sizeMd]="6" sizeLg="3">
-        <ion-select mode="md" #productSelect label="Selecciona el producto" label-placement="floating" fill="outline"
+        <ion-select interface="popover" mode="md" #productSelect label="Selecciona el producto" label-placement="floating" fill="outline"
           [disabled]="availableProducts.length === 0">
           <ion-select-option *ngFor="let product of availableProducts" [value]="product.value">{{ product.label
             }}</ion-select-option>
