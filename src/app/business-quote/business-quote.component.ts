@@ -17,11 +17,7 @@ import { BupaInsuredCarouselComponent } from '../bupa-insured-carousel/bupa-insu
 export class BusinessQuoteComponent implements OnInit {
   @ViewChild(BupaInsuredCarouselComponent) carouselComponent!: BupaInsuredCarouselComponent;
 
-  customSwiperConfig = {
-    pagination: {
-      clickable: true,
-    },
-  }
+  customSwiperConfig = {}
 
   public showAddSlideButton = false;
   public insured!:string[];
