@@ -21,9 +21,9 @@
       </ion-col>
     </ion-row>
   </ion-card-header>
-  <ion-card-content class="ion-no-padding-bottom" mode="ios" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
+  <ion-card-content class="ion-no-padding-bottom" mode="ios" [ngClass]="{'hiddenContentCard': !isCardContentVisible}">
 
-    <hr *ngIf="planTitle" [class.hiddenContentCard]="!isCardContentVisible" [class.visibleContentCard]="isCardContentVisible">
+    <hr *ngIf="planTitle" [ngClass]="{'hiddenContentCard': !isCardContentVisible}">
     <app-bupa-quote-product-card-limits
     [hidden]="(planMountLimit.length === 0 && planCoverage.length === 0)"
     [planMountLimit]="planMountLimit"
@@ -47,7 +47,7 @@
   </ion-card-content>
 
   <app-plan-payment-info
-    [isCardContentVisible]="isCardContentVisible"
+    [ngClass]="{'hiddenContentCard': !isCardContentVisible}"
     [planPaymentPlan]="planPaymentPlan"
     [planPrice]="planPrice"
     [promoPercents]="promoPercents"
@@ -57,15 +57,23 @@
   ></app-plan-payment-info>
 
   <app-featured-benefits-accordion
+    [ngClass]="{'hiddenContentCard': !isCardContentVisible}"
     *ngIf="featuredBenefits.length > 0"
-    [isCardContentVisible]="isCardContentVisible"
     [featuredBenefits]="featuredBenefits"
   ></app-featured-benefits-accordion>
 
+  <ion-card-content class="card-footer-content ion-padding ion-text-center ion-margin-top" [ngClass]="{'hiddenContentCard': !isCardContentVisible}">
+    <ion-button class="ion-text-underline" fill="clear" expand="block">Más iformación</ion-button>
+    <app-modal-send-business-plan mode="md" [buttonLabel]="'Enviar cotización'" planId="open-modal-send-plan-{{planId}}"></app-modal-send-business-plan>
+    <ion-button shape="solid" mode="ios" color="primary" (click)="selectPlan()">Seleccionar Plan</ion-button>
+  </ion-card-content>
 
-  <div id="planPaymentPromoInContent" class="ion-padding plan-payment-promo-in-content mobile-only ion-no-padding-top" [class.hiddenContentCard]="isCardContentVisible" [class.visibleContentCard]="!isCardContentVisible">
-    <h3 class="ion-text-center san-color-secondary-25"><sup class="text-overline">{{planPrice | currency}}</sup> {{promoPlanPrice | currency }}</h3>
-  </div>
+  <app-bupa-quote-product-summary-price
+    [planPrice]="planPrice"
+    [promoPlanPrice]="promoPlanPrice"
+    [ngClass]="{'hiddenContentCard': isCardContentVisible}"
+  ></app-bupa-quote-product-summary-price>
+
   <ion-toast
     #toast
     swipe-gesture="vertical"

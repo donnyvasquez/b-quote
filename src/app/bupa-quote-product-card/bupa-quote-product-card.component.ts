@@ -10,6 +10,7 @@ import { DeductibleMountComponent } from '../deductible-mount/deductible-mount.c
 import { AditionalCoverageOptionsComponent } from '../aditional-coverage-options/aditional-coverage-options.component';
 import { PlanPaymentInfoComponent } from '../plan-payment-info/plan-payment-info.component';
 import { FeaturedBenefitsAccordionComponent } from '../featured-benefits-accordion/featured-benefits-accordion.component';
+import { BupaQuoteProductSummaryPriceComponent } from '../bupa-quote-product-summary-price/bupa-quote-product-summary-price.component';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { FeaturedBenefitsAccordionComponent } from '../featured-benefits-accordi
   templateUrl: './bupa-quote-product-card.component.html',
   styleUrls: ['./bupa-quote-product-card.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent, DeductibleMountComponent, AditionalCoverageOptionsComponent, PlanPaymentInfoComponent, FeaturedBenefitsAccordionComponent]
+  imports: [IonicModule, CommonModule, FormsModule, StripHtmlPipe, ModalSendBusinessPlanComponent, BupaQuoteProductCardLimitsComponent, DeductibleMountComponent, AditionalCoverageOptionsComponent, PlanPaymentInfoComponent, FeaturedBenefitsAccordionComponent, BupaQuoteProductSummaryPriceComponent]
 })
 export class BupaQuoteProductCardComponent implements OnInit {
   modalTemplate!: TemplateRef<any>;
@@ -58,12 +59,6 @@ export class BupaQuoteProductCardComponent implements OnInit {
     readonly modalSendController: ModalController
   ) {}
 
-  async openModalSendPlan() {
-    const modalSend = await this.modalSendController.create({
-      component: ModalSendBusinessPlanComponent,
-    });
-    return await modalSend.present();
-  }
   toggleCardContent() {
     this.isCardContentVisible = !this.isCardContentVisible;
   }

@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
   imports: [IonicModule, CommonModule]
 })
 export class PlanPaymentInfoComponent {
-  @Input() isCardContentVisible: boolean = false;
   @Input() planPaymentPlan: string = '';
   @Input() planPrice: number = 0;
   @Input() promoPercents: string | undefined = undefined;

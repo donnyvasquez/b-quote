@@ -1,6 +1,4 @@
 <div *ngIf="planPaymentPlan || planPrice" id="planPaymentPlanTemplate"
-     [class.hiddenContentCard]="!isCardContentVisible"
-     [class.visibleContentCard]="isCardContentVisible"
      class="plan-payment-plan ion-card-padding-horizontal">
   <p *ngIf="planPaymentPlan" class="ion-no-margin">
     <span [innerHtml]="planPaymentPlan"></span>
@@ -9,8 +7,6 @@
 </div>
 
 <div *ngIf="promoPercents" id="planPaymentPromo"
-     [class.hiddenContentCard]="!isCardContentVisible"
-     [class.visibleContentCard]="isCardContentVisible"
      class="ion-padding ion-background-secondary plan-payment-promo">
   <p><strong>Precio promocional: {{promoPercents}} de descuento</strong></p>
   <p><span [innerHtml]="promoPlanPaymentPlan"></span></p>

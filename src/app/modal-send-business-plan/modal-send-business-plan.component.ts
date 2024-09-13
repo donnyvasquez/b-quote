@@ -1,4 +1,4 @@
-import { Component, Input, Output, ViewChild } from '@angular/core';
+import { Component, Input, Output, ViewChild, OnInit } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule, IonRadioGroup } from '@ionic/angular';
@@ -10,8 +10,9 @@ import { IonicModule, IonRadioGroup } from '@ionic/angular';
   standalone: true,
   imports: [RouterModule, CommonModule, IonicModule]
 })
-export class ModalSendBusinessPlanComponent   {
+export class ModalSendBusinessPlanComponent implements OnInit   {
   @Input() planId!: string;
+  @Input() buttonLabel!: string;
   public selectedContactMethod: string;
 
   canDismiss = true;
@@ -39,7 +40,11 @@ export class ModalSendBusinessPlanComponent   {
   }
   showSelectedContactOptionsChange(event: CustomEvent) {
     this.selectedContactOption = event.detail.value;
-
+  }
+  resetModalData(){
+    this.showContactOptions = false;
+    this.selectedContactOption= undefined;
+    this.radioGroup = undefined;
   }
 
 }

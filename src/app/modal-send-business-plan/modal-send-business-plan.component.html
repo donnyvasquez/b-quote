@@ -1,10 +1,14 @@
+<ion-button id="openModalButton-{{planId}}" class="ion-text-underline ion-text-lowercase ion-text-capitalize" fill="clear" expand="block">
+  {{buttonLabel}}
+</ion-button>
 <ion-modal
   backdropDismiss="true"
   [presentingElement]="presentingElement"
   #modalSendPlan
   show-backdrop="true"
-  [trigger]="planId"
+  trigger="openModalButton-{{planId}}"
   [canDismiss]="canDismiss"
+  (ionModalDidDismiss)="resetModalData()"
   >
   <ng-template>
     <ion-header class="ion-no-border">
