@@ -55,7 +55,7 @@
         <ion-row>
           <ion-col>
             <!-- Checkbox para habilitar contacto -->
-            <ion-checkbox class="ion-margin-vertical" (ionChange)="showContactOptionsToogle()" labelPlacement="end" justify="start">Quiero me contacten para recibir información (Opcional).</ion-checkbox>
+            <ion-checkbox class="ion-margin-vertical contact-checkbox" (ionChange)="showContactOptionsToogle()" labelPlacement="end" justify="start">Quiero me contacten para recibir información (Opcional).</ion-checkbox>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="this.showContactOptions">
@@ -78,8 +78,8 @@
         <ion-row>
           <ion-col>
             <!-- Términos y condiciones -->
-            <ion-text>
-              <ion-content #termsAndConditions class="modal-send-plan--terms ion-padding">
+            <ion-text class="">
+              <ion-content #termsAndConditions class="terms-conditions-text modal-send-plan--terms ion-padding">
                 Desde Bupa Global Latinoamérica, cumplimos con la Ley Orgánica de Protección de Datos Personales y otras normativas aplicables, en el uso de sus datos personales...  Desde Bupa Global Latinoamérica, cumplimos con la Ley Orgánica de Protección de Datos Personales y otras normativas aplicables, en el uso de sus datos personales...  Desde Bupa Global Latinoamérica, cumplimos con la Ley Orgánica de Protección de Datos Personales y otras normativas aplicables, en el uso de sus datos personales...  </ion-content>
             </ion-text>
           </ion-col>

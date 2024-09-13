@@ -2,7 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild, After
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
-import { BupaQuoteProductCardComponent } from '../bupa-quote-product-card/bupa-quote-product-card.component';
+import { BupaQuoteProductCardComponent } from '../bupa-product-card/bupa-quote-product-card/bupa-quote-product-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { BupaIonRadioComponent } from "../bupa-ion-radio/bupa-ion-radio.component";
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';

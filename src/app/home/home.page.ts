@@ -3,7 +3,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
-import { BupaQuoteProductCardComponent } from '../bupa-quote-product-card/bupa-quote-product-card.component';
+import { BupaQuoteProductCardComponent } from '../bupa-product-card/bupa-quote-product-card/bupa-quote-product-card.component';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 

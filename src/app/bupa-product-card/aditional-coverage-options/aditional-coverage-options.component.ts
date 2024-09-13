@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BupaInsuredCarouselComponent } from '../bupa-insured-carousel/bupa-insured-carousel.component';
-import { StripHtmlPipe } from '../pipes/strip-html.pipe';
+import { StripHtmlPipe } from '../../pipes/strip-html.pipe';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -10,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './aditional-coverage-options.component.html',
   styleUrls: ['./aditional-coverage-options.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, StripHtmlPipe, BupaInsuredCarouselComponent, IonicModule]
+  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule]
 })
 export class AditionalCoverageOptionsComponent {
   @Input() aditionalCoverageOptions: any[] = [];
