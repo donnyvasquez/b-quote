@@ -59,8 +59,8 @@
       *ngIf="insuranceScenariosService.isNewBusinessCustomer()
       || insuranceScenariosService.isPmiEcuador()
       || insuranceScenariosService.isRenewal()">
-      <ion-row class="ion-text-center" *ngIf="!insuranceScenariosService.isPmiEcuador()">
-        <ion-col size="12">
+      <ion-row class="ion-text-center ion-justify-content-around" *ngIf="!insuranceScenariosService.isPmiEcuador()">
+        <ion-col size="12" sizeMd="6">
           <hr class="ion-margin">
           <h2>¿Necesitas más opciones?</h2>
         </ion-col>
