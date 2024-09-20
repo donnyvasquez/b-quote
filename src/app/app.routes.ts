@@ -18,4 +18,8 @@ export const routes: Routes = [
     path: 'business-plans',
     loadComponent: () => import('./business-plans/business-plans.component').then((m) => m.BusinessPlansComponent),
   },
+  {
+    path: 'business-renewal-quote',
+    loadComponent: () => import('./business-renewal-quote/business-renewal-quote.component').then((m) => m.BusinessRenewalQuoteComponent),
+  },
 ];

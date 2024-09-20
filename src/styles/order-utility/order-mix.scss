@@ -1,0 +1,33 @@
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+@mixin generate-order-utilities($breakpoints, $max-order: 12) {
+  @each $name, $breakpoint in $breakpoints {
+    @for $i from 0 through $max-order {
+      // Clase sin media query (para todos los tamaños de pantalla)
+      @if $breakpoint == 0 {
+        .order-#{$i} {
+          order: $i;
+        }
+      }
+
+      // Clases con media query para breakpoints específicos
+      @if $breakpoint != 0 {
+        @media (min-width: $breakpoint) {
+          .order-#{$name}-#{$i} {
+            order: $i !important
+          }
+        }
+      }
+    }
+  }
+}
+
+// Uso del mixin en tu archivo SCSS
+@include generate-order-utilities($breakpoints);

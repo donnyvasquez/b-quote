@@ -1,6 +1,15 @@
 ion-button{
   margin:0px;
+  transition: all 0.3s ease;
 }
+.activated-dropdown-trigger::part(native) {
+  background-color: var(--ion-color-primary-shade);
+}
+
+.activated-dropdown-trigger:hover::part(native)::after {
+  background-color: var(--background-activated);
+}
+
 .app-button-actions--wrapper{
   position:relative;
   display:inline-block;
@@ -8,7 +17,6 @@ ion-button{
 
 .btns-group{
   width: max-content;
-  display: none;
 
   ion-button{
     --background: #fff;
@@ -25,16 +33,19 @@ ion-button{
 .app-button-actions--options {
   transition: all 0.2s ease-in;
   ion-button {
-    transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in-out;
     transform: translateY(0);
     ion-icon {
       margin-inline-start: 0.5rem;
+    }
+    &:last-child{
+      margin-block-end: 0.5rem!important;
     }
   }
 
   &.movedown {
     ion-button {
-      transform: translateY(3px);
+      transform: translateY(0.5rem);
     }
   }
 }

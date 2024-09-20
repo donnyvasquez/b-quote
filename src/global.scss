@@ -24,6 +24,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "./styles/utilities.scss";
 
 /**
  * Ionic Dark Mode
@@ -100,8 +101,9 @@ ion-modal::part(backdrop) {
   --backdrop-color: var(--ion-color-dark);
 }
 
-ion-button:not(.btn-toogle){
+ion-button:not(.btn-toogle):not([shape=round]){
   --border-radius: 5px;
+  margin: 0;
 }
 
 
@@ -193,4 +195,63 @@ ion-button:not(.btn-toogle){
     padding-inline-start: 20px;
     -webkit-padding-end: 20px;
     padding-inline-end: 20px;
+}
+
+/* Popover */
+ion-popover.ion-no-border-radius{
+  --border-radius: 0px;
+  border-radius: 0px;
+  ion-content{
+    --border-radius: 0px;
+    border-radius: 0px;
+  }
+}
+
+/* Custom tooltip */
+/* Custom tooltip */
+.custom-tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block; /* Asegura que el elemento tenga dimensiones */
+}
+
+.custom-tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  white-space: normal;
+  width: max-content;
+  max-width: attr(data-tooltip-max-width length, 200px);
+  z-index: 1000; /* Asegura que el tooltip esté por encima de otros elementos */
+}
+
+.custom-tooltip[data-tooltip-position="left"]::before {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 10px; /* Espacio entre el tooltip y el elemento */
+}
+
+.custom-tooltip[data-tooltip-position="right"]::before {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 10px; /* Espacio entre el tooltip y el elemento */
+}
+
+.custom-tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
 }

@@ -1,2 +1,58 @@
 /* src/styles/utilities.scss */
+@import './order-utility/order-mix.scss';
+@include generate-order-utilities($breakpoints);
 
+/* Opacity */
+.opacity-0{
+  opacity: 0;
+}
+.opacity-10{
+  opacity: 0.1;
+}
+.opacity-20{
+  opacity: 0.2;
+}
+.opacity-30{
+  opacity: 0.3;
+}
+.opacity-40{
+  opacity: 0.4;
+}
+.opacity-50{
+  opacity: 0.5;
+}
+.opacity-100{
+  opacity: 1;
+}
+
+/* Position */
+.position-absolute{
+  position: absolute;
+}
+
+.bottom-100{
+  bottom: 100%;
+}
+
+.end-0{
+  right: 0;
+}
+
+/* Gap */
+.gap-1{
+  gap: 0.25rem;
+}
+.gap-2{
+  gap: 0.5rem;
+}
+.gap-3{
+  gap: 1rem
+}
+
+/* Order */
+.order-0{
+  order: 0;
+}
+.order-1{
+  order: 1;
+}

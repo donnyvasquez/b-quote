@@ -47,6 +47,18 @@
       </ion-col>
 
       <ion-col size="12" size-md="6" size-lg="3">
+        <ion-card (click)="navigate('business-renewal-quote', 'renewal_quote')" button>
+          <ion-card-header>
+            <ion-icon size="large" name="refresh-circle-outline"></ion-icon>
+            <ion-card-title>Renewals quote</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Use this option to manage policy renewals quote for existing customers.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="6" size-lg="3">
         <ion-card (click)="navigate('business-quote', 'agent')" button>
           <ion-card-header>
             <ion-icon size="large" name="person-outline"></ion-icon>
