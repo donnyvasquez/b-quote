@@ -3,18 +3,21 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ButtonActionsComponent } from "../button-actions/button-actions.component";
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BupaFieldOutputComponent } from "../bupa-field-output/bupa-field-output.component";
+import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 
 export interface InsuredPersonDetails {
   title: string;
   details: {
-    inPolice: boolean; // Indica si proviene de la pÛliza
-    enabledInQuote: boolean; // Indica si est· habilitado en la cotizaciÛn
+    insuredType: string;
+    inPolice: boolean; // Indica si proviene de la p√≥liza
+    enabledInQuote: boolean; // Indica si est√° habilitado en la cotizaci√≥n
     typeLabel: string;
     typeValue: string;
     birthDateLabel: string;
     birthDateValue: string;
+    isOverDate: boolean | undefined; // Indica si sobrepas√≥ la edad
     rateLabel: string;
     rateValue: string;
     extraPremiumLabel: string;
@@ -34,11 +37,22 @@ export class RenewalInsuredPersonComponent {
   @Input() index!: number | string;
   @Output() togglePersonStatus = new EventEmitter<InsuredPersonDetails>();
 
+  constructor(
+    readonly insuranceScenariosService: InsuranceScenariosService,
+    private router: Router,
+  ){}
+
   onToggleStatus() {
     this.togglePersonStatus.emit(this.insuredPersonData);
   }
 
+  navigate(route: string, policeCase: string): void {
+    this.insuranceScenariosService.setPoliceCase(policeCase);
+    console.log(`Navigating to ${route} with policeCase: ${policeCase}`);
+    this.router.navigate([route]);
+  }
+
   isTitular(): boolean {
-    return this.insuredPersonData.title == 'Titular';
+    return this.insuredPersonData.details.insuredType == 'titular';
   }
 }
