@@ -234,9 +234,21 @@ export class BusinessRenewalQuoteComponent implements OnInit {
     this.activeInsuredPeople = this.insuredPeople.filter(person => person.details.enabledInQuote);
     this.disabledInsuredPeople = this.insuredPeople.filter(person => !person.details.enabledInQuote);
 
+    // Ordeno disabledInsuredPeople colocando los de 24 años o más al final
+    this.disabledInsuredPeople.sort((a, b) => {
+      const ageA = this.calculateAge(a.details.birthDateValue);
+      const ageB = this.calculateAge(b.details.birthDateValue);
+
+      // Si la edad es 24 o más, se coloca al final
+      if (ageA >= 24 && ageB < 24) return 1;
+      if (ageA < 24 && ageB >= 24) return -1;
+      return 0; // Mantener el orden relativo de los otros elementos
+    });
+
     console.log('Active insured:', this.activeInsuredPeople); // Para verificar el filtrado de asegurados activos
     console.log('Disabled insured:', this.disabledInsuredPeople); // Para verificar el filtrado de asegurados desactivados
   }
+
 
 
   comparePoliceQuote():boolean{
