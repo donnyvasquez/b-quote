@@ -41,3 +41,44 @@
     }
   }
 }
+
+::ng-deep app-renewal-insured-person{
+  .new-person{
+    border-inline-start:3px solid rgba(var(--ion-color-primary-rgb, 0, 84, 233), 0.5);
+    background-color: rgba(var(--ion-color-primary-rgb, 0, 84, 233), 0.15);
+  }
+}
+
+.renewal-cost-ctas--section{
+  ion-row ion-col{
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    ion-row ion-col:nth-child(2){
+      &::after,&::before{
+        content: ' ';
+        display: block;
+        width: 1px;
+        height:100%;
+        position: absolute;
+        top: 0;
+        background-color: #4E5357;
+      }
+      &::after{
+        right: 0;
+      }
+      &::before{
+        left: 0;
+      }
+    }
+  }
+  @media (min-width:992px) {
+
+  }
+  p{
+    margin-block: 8px;
+  }
+  .renewal-cost-ctas--section-total{
+    font-size:1.3rem;
+  }
+}

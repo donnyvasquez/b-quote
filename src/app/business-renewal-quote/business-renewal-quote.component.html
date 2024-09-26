@@ -60,7 +60,7 @@
       <ion-row>
         <ion-col size="12">
           <div class="renewal-quote-title--wrapper tabs-aspect--wrapper ion-align-items-center ion-display-flex">
-            <h3 class="renewal-quote-title tabs-aspect ion-align-items-center">Cotiza tu renovación
+            <h3 class="renewal-quote-title tabs-aspect ion-align-items-center ion-padding-horizontal">Cotiza tu renovación
               <span class="custom-tooltip" data-tooltip-position="right" data-tooltip-max-width="150px" data-tooltip="Haz realizado cambios que no están guardados"><ion-icon *ngIf="quoteIsDiffPolice" size="large" slot="icon-only" color="danger" name="information-circle-outline" class="ion-margin-start" ></ion-icon></span>
             </h3>
           </div>
@@ -92,10 +92,23 @@
           </ion-row>
         </ion-col>
         <ion-col size="12" sizeMd="auto">
-          <ion-button mode="ios" fill="outline" color="primary">
+          <ion-button id="add-insured" mode="ios" fill="outline" color="primary">
             <ion-icon name="add-circle" class="ion-margin-end"></ion-icon>
             Cotizar dependiente
           </ion-button>
+          <ion-modal #modal style="--height: auto; --background: transparent; --width:290px" trigger="add-insured" [canDismiss]="true">
+            <ng-template>
+              <app-insured-business-card
+                [actionButtonText]="'Agregar'"
+                [persona]="{persona:'Asegurado'}"
+                [showRelationship]="true"
+                [relationshipOptions]="relationshipOptions"
+                [showName]="true"
+                [showLastName]="true"
+                (actionButtonTriggered)="addNewInsured()"
+              ></app-insured-business-card>
+            </ng-template>
+          </ion-modal>
         </ion-col>
       </ion-row>
     </section>
@@ -119,6 +132,30 @@
       </app-renewal-insured-person>
     </section>
 
+    <section class="renewal-cost-ctas--section ion-padding-bottom ion-margin-bottom">
+      <h3 class="ion-margin-vertical">{{ costosCTAsData.titulo }}</h3>
+      <ion-row class="ion-justify-content-center ion-align-items-center gap-3">
+        <ion-col size="12" sizeSm="12" sizeMd="3">
+          <p>{{ costosCTAsData.columnas.subtotal[0].label }}: <strong>{{ costosCTAsData.columnas.subtotal[0].valor }}</strong></p>
+          <p>{{ costosCTAsData.columnas.subtotal[1].label }}: {{ costosCTAsData.columnas.subtotal[1].valor }}</p>
+          <p>{{ costosCTAsData.columnas.subtotal[2].label }}: {{ costosCTAsData.columnas.subtotal[2].valor }}</p>
+        </ion-col>
+        <ion-col size="12" sizeSm="12" sizeMd="auto">
+          <p>{{ costosCTAsData.columnas.discounts[0].label  }}: {{ costosCTAsData.columnas.discounts[0].valor }}</p>
+          <p>{{ costosCTAsData.columnas.discounts[1].label }}: {{ costosCTAsData.columnas.discounts[1].valor }}</p>
+          <p>{{ costosCTAsData.columnas.discounts[2].label }}: {{ costosCTAsData.columnas.discounts[2].valor }}</p>
+        </ion-col>
+        <ion-col size="12" sizeSm="12" sizeMd="3">
+          <p class="san-color-secondary-25 renewal-cost-ctas--section-total"><strong>{{ costosCTAsData.columnas.totals.items[0].label }}: {{ costosCTAsData.columnas.totals.items[0].valor }}</strong></p>
+          <p>{{ costosCTAsData.columnas.totals.items[1].label }}: {{ costosCTAsData.columnas.totals.items[1].valor }}</p>
+          <p>{{ costosCTAsData.columnas.totals.items[2].label }}: {{ costosCTAsData.columnas.totals.items[2].valor }}</p>
+          <p class="nota"><strong class="san-color-secondary-25">Nota:</strong> {{ costosCTAsData.columnas.totals.nota }}</p>
+        </ion-col>
+      </ion-row>
+    </section>
+
   </ion-grid>
+<ion-toast #toast mode="ios" message="Hay cambios pendientes de guardar." duration="2000" color="medium" position="top" icon="information-circle-outline"></ion-toast>
 </ion-content>
+
 <app-button-actions></app-button-actions>
