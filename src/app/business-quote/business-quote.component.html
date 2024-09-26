@@ -63,14 +63,13 @@
       <ion-row class="ion-justify-content-center ion-nowrap ">
         <ion-col>
           <app-bupa-insured-carousel
-            [insured]="insured"
+            [insured]="insuredData"
             [selectedBirthDate]="selectedBirthDate"
             [relationshipOptions]="relationshipOptions"
             [showRemoveButton]="showRemoveButton"
             [swiperConfig]="customSwiperConfig"
             (addSlide)="addSlide()"
             (removeSlide)="removeSlide($event)"
-            (birthDateChange)="onBirthDateChange($event)"
           ></app-bupa-insured-carousel>
         </ion-col>
       </ion-row>
@@ -79,10 +78,10 @@
 </ion-content>
 <ion-footer class="ion-padding">
   <ion-row class="ion-justify-content-center">
-    <ion-button [disabled]="(this.insured.length < 2 && this.showAddSlideButton)"
-      [color]="(this.insured.length < 2 && this.showAddSlideButton) ? 'medium' : 'primary'" mode="ios"
+    <ion-button [disabled]="(this.insuredData.length < 2 && this.showAddSlideButton)"
+      [color]="(this.insuredData.length < 2 && this.showAddSlideButton) ? 'medium' : 'primary'" mode="ios"
       (click)="navigateToPlans()">
-      {{ (this.insured.length < 2 && this.showAddSlideButton) ? 'Debe llenar otra tarjeta para calcular'
+      {{ (this.insuredData.length < 2 && this.showAddSlideButton) ? 'Debe llenar otra tarjeta para calcular'
         : 'Calcular precio' }} </ion-button>
   </ion-row>
 </ion-footer>

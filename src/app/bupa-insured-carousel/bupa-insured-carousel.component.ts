@@ -17,7 +17,7 @@ export class BupaInsuredCarouselComponent implements AfterViewInit, OnChanges {
   @ViewChildren(InsuredBusinessCardComponent) slideComponents!: QueryList<InsuredBusinessCardComponent>;
   private swiper?: Swiper;
 
-  @Input() insured: string[] = [];
+  @Input() insured: any = [];
   @Input() selectedBirthDate: any[] = [];
   @Input() relationshipOptions: any[] = [];
   @Input() showRemoveButton: boolean = true;

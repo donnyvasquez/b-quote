@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  background-color: #0D1846;
+  background-color: #0079C8;
   ion-badge{
     aspect-ratio: 1;
     border-radius: 50%;
@@ -39,7 +39,7 @@ ion-card {
   }
 }
 ion-card-content{
-  background-color: #0079C8;
+  background-color: #0D1846;
 }
 ion-datetime-button{
   &::part(native) {

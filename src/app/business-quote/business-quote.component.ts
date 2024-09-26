@@ -1,27 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 import { BupaInsuredCarouselComponent } from '../bupa-insured-carousel/bupa-insured-carousel.component';
+import { InsuredBusinessCardComponent } from '../insured-business-card/insured-business-card.component';
+
+interface InsuredData {
+  id: number;
+  persona: string;
+  birthDate?: string;
+  relationship?: string;
+}
 
 @Component({
   selector: 'app-business-quote',
   templateUrl: './business-quote.component.html',
   styleUrls: ['./business-quote.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, BupaInsuredCarouselComponent],
+  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, BupaInsuredCarouselComponent, InsuredBusinessCardComponent],
 })
 export class BusinessQuoteComponent implements OnInit {
   @ViewChild(BupaInsuredCarouselComponent) carouselComponent!: BupaInsuredCarouselComponent;
-
   customSwiperConfig = {}
 
   public showAddSlideButton = false;
-  public insured!:string[];
-
+  public insuredData: InsuredData[] = [];
   whoToInsureOptions = [
     { value: 'individual', label: 'Una persona' },
     { value: 'family', label: 'Una familia' },
@@ -78,7 +84,7 @@ export class BusinessQuoteComponent implements OnInit {
   ngOnInit(): void {
     this.policeCase = this.insuranceScenariosService.getPoliceCase();
     console.log(`International Business Quote component loaded with policeCase: ${this.policeCase}`);
-    this.insured = ['Titular'];
+    this.insuredData = [{ id: 0, persona: 'Titular' }];
   }
 
   onProductTypeChange(event: any) {
@@ -95,7 +101,7 @@ export class BusinessQuoteComponent implements OnInit {
   onWhoToInsureChange(event: any) {
     const selectedValue = event.detail.value;
 
-    this.insured = ['Titular'];
+    this.insuredData = [{ id: 0, persona: 'Titular' }];
 
     if (selectedValue === 'family') {
       this.addSlide();
@@ -113,32 +119,23 @@ export class BusinessQuoteComponent implements OnInit {
   }
 
   addSlide() {
-    this.insured.push(`Asegurado`);
+    const newId = this.insuredData.length;
+    this.insuredData.push({ id: newId, persona: `Asegurado ${newId + 1}` });
 
     setTimeout(() => {
-      //console.log('Entré al setTimeout');
       this.carouselComponent.focusLastSlide();
-
     }, 200);
   }
 
   removeSlide(index: number) {
-    this.insured.splice(index, 1);
+    this.insuredData = this.insuredData.filter(item => item.id !== index);
   }
 
-  onBirthDateChange(event: any) {
-    const { event: dateEvent, index } = event;
-    const selectedDate = dateEvent.detail.value;
-    const date = new Date(selectedDate);
-
-    const formattedDate = date.toLocaleDateString('es-ES', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-
-    this.selectedBirthDate[index] = formattedDate;
+  onCardDataChange(data: Partial<InsuredData>) {
+    const index = this.insuredData.findIndex(item => item.id === data.id);
+    if (index !== -1) {
+      this.insuredData[index] = { ...this.insuredData[index], ...data };
+    }
   }
 
   navigateToPlans() {
