@@ -1,4 +1,4 @@
-<ion-card mode="ios" color="primary" class="insured-data-card ion-no-margin" tabindex="0" role="button">
+<ion-card mode="ios" color="primary" class="insured-data-card ion-no-margin">
   <ion-card-header class="insured-data-card-header">
     <ion-card-title>
       <div class="ion-display-flex ion-justify-content-start ion-align-items-center">
@@ -59,11 +59,11 @@
         </ion-input>
       </ion-col>
     </ion-row>
-
     <ion-row *ngIf="this.showRelationship">
       <ion-col size="12"><ion-label>Parentesco</ion-label></ion-col>
       <ion-col size="12">
         <ion-select mode="md" interface="popover" #relationshipSelect aria-label="Select Relationship" label-placement="stacked"
+          [value]="relationshipOptions.length > 0 ? relationshipOptions[0].value : ''"
           fill="outline">
           <ion-select-option *ngFor="let option of relationshipOptions" [value]="option.value">{{ option.label
             }}</ion-select-option>
