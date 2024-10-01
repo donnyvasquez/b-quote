@@ -62,15 +62,21 @@
       </ion-row>
       <ion-row class="ion-justify-content-center ion-nowrap ">
         <ion-col>
-          <app-bupa-insured-carousel
-            [insured]="insuredData"
-            [selectedBirthDate]="selectedBirthDate"
-            [relationshipOptions]="relationshipOptions"
-            [showRemoveButton]="showRemoveButton"
-            [swiperConfig]="customSwiperConfig"
-            (addSlide)="addSlide()"
-            (removeSlide)="removeSlide($event)"
-          ></app-bupa-insured-carousel>
+          <swiper-container #swiper [mousewheel]="true" centeredSlides="auto" [grabCursor]="swiperConfig.grabCursor" [effect]="swiperConfig.effect" [slidesPerView]="swiperConfig.slidesPerView" [spaceBetween]="swiperConfig.spaceBetween" [loop]="swiperConfig.loop" [ngClass]="{'swiper-pager-active':swiperConfig.pagination, 'part-wraper-centered':insuredData.length < 3}">
+            <swiper-slide class="insured-data-slide" *ngFor="let persona of insuredData; let i = index">
+              <app-insured-business-card
+                [persona]="persona"
+                [idNumber]="i"
+                [insuredLength]="insuredData.length"
+                [showRelationship]="i !== 0"
+                [relationshipOptions]="relationshipOptions"
+                [removeCardButton]="showRemoveButton && i !== 0"
+                (cardDataChange)="onCardDataChange($event)"
+                (removeCard)="removeSlide($event)"
+              ></app-insured-business-card>
+            </swiper-slide>
+          </swiper-container>
+          {{swiper.addEventListener|json}}
         </ion-col>
       </ion-row>
     </section>

@@ -10,3 +10,21 @@
     background-color: #0D1846;
   }
 }
+swiper-slide {
+    width: 296px;
+    &:not(:first-child) {
+      ::ng-deep .insured-data-card-header {
+        background-color: #0D1846;
+      }
+      ::ng-deep ion-card-content {
+        background-color: #0079C8;
+      }
+    }
+  }
+swiper-container.part-wraper-centered {
+  &::part(wrapper){
+    @media (min-width: 768px) {
+      justify-content: center;
+    }
+  }
+}

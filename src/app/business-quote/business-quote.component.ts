@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit, SimpleChanges, QueryList, ViewChildren, OnChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StripHtmlPipe } from '../pipes/strip-html.pipe';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
-import { BupaInsuredCarouselComponent } from '../bupa-insured-carousel/bupa-insured-carousel.component';
 import { InsuredBusinessCardComponent } from '../insured-business-card/insured-business-card.component';
+import Swiper from 'swiper';
 
 interface InsuredData {
   id: number;
@@ -20,11 +20,13 @@ interface InsuredData {
   templateUrl: './business-quote.component.html',
   styleUrls: ['./business-quote.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, BupaInsuredCarouselComponent, InsuredBusinessCardComponent],
+  imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, InsuredBusinessCardComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BusinessQuoteComponent implements OnInit {
-  @ViewChild(BupaInsuredCarouselComponent) carouselComponent!: BupaInsuredCarouselComponent;
-  customSwiperConfig = {}
+export class BusinessQuoteComponent implements OnInit, OnChanges, AfterViewInit {
+  @ViewChild('swiper', { static: false }) swiperElement!: ElementRef;
+  @ViewChildren(InsuredBusinessCardComponent) slideComponents!: QueryList<InsuredBusinessCardComponent>;
+  private swiper?: Swiper;
 
   public showAddSlideButton = false;
   public insuredData: InsuredData[] = [];
@@ -34,11 +36,11 @@ export class BusinessQuoteComponent implements OnInit {
   ];
 
   relationshipOptions = [
-    { value: 'spouse', label: 'Spouse' }, // Esposo/a
-    { value: 'child', label: 'Child' },   // Hijo/a
-    { value: 'parent', label: 'Parent' }, // Padre/Madre
-    { value: 'sibling', label: 'Sibling' }, // Hermano/a
-    { value: 'other', label: 'Other' }    // Otro
+    { value: 'spouse', label: 'Spouse' },
+    { value: 'child', label: 'Child' },
+    { value: 'parent', label: 'Parent' },
+    { value: 'sibling', label: 'Sibling' },
+    { value: 'other', label: 'Other' }
   ];
 
   countryOptions = [
@@ -78,13 +80,65 @@ export class BusinessQuoteComponent implements OnInit {
   selectedProductType: string | null = null;
   policeCase!: string | undefined;
 
-  constructor(private router: Router,
-   readonly insuranceScenariosService: InsuranceScenariosService) {}
+  swiperConfig: any = {
+    grabCursor: true,
+    centeredSlides: "auto",
+    slidesPerView: "auto",
+    slidesToScroll: 1,
+    loop: false,
+    spaceBetween: 15
+  };
+
+  defaultSwiperConfig = {
+    grabCursor: true,
+    centeredSlides: "auto",
+    slidesPerView: "auto",
+    slidesToScroll: 1,
+    loop: false,
+    spaceBetween: 15
+  };
+  centeredSlides: boolean |  'auto' = 'auto';
+
+  constructor(
+    private el: ElementRef,
+    private router: Router,
+    readonly insuranceScenariosService: InsuranceScenariosService
+  ) {}
 
   ngOnInit(): void {
     this.policeCase = this.insuranceScenariosService.getPoliceCase();
     console.log(`International Business Quote component loaded with policeCase: ${this.policeCase}`);
     this.insuredData = [{ id: 0, persona: 'Titular' }];
+  }
+
+  ngAfterViewInit() {
+    this.initSwiper();
+  }
+  focus() {
+    const lastSwiperSlide = this.el.nativeElement.querySelector('swiper-slide:nth-last-of-type(1) ion-card');
+
+    if (lastSwiperSlide) {
+      lastSwiperSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['insured'] && !changes['insured'].firstChange) {
+      setTimeout(() => {
+        if (this.swiper) {
+          this.swiper.update();
+        }
+      });
+    }
+  }
+
+  private initSwiper() {
+    const config = { ...this.defaultSwiperConfig, ...this.swiperConfig };
+    this.swiper = new Swiper(this.swiperElement.nativeElement, config);
+  }
+
+  get slideConfig() {
+    return { ...this.defaultSwiperConfig, ...this.swiperConfig };
   }
 
   onProductTypeChange(event: any) {
@@ -121,14 +175,22 @@ export class BusinessQuoteComponent implements OnInit {
   addSlide() {
     const newId = this.insuredData.length;
     this.insuredData.push({ id: newId, persona: `Asegurado ${newId + 1}` });
-
     setTimeout(() => {
-      this.carouselComponent.focusLastSlide();
+      if (this.swiper) {
+        this.swiper.slideTo(this.insuredData.length + 1);
+        this.focus();
+      }
     }, 200);
   }
 
   removeSlide(index: number) {
-    this.insuredData = this.insuredData.filter(item => item.id !== index);
+    this.insuredData.splice(index, 1);
+    setTimeout(() => {
+      if (this.swiper) {
+        this.swiper.update();
+        this.focus();
+      }
+    });
   }
 
   onCardDataChange(data: Partial<InsuredData>) {
