@@ -32,13 +32,13 @@ export class InsuredBusinessCardComponent implements OnInit  {
   selectedName: string = '';
   selectedLastName: string = '';
 
-  constructor(private el: ElementRef) {}
+  constructor() {}
 
   ngOnInit() {
-    /* console.log(JSON.stringify(this.idNumber));
-    console.warn(JSON.stringify(this.persona)); */
-    this.selectedName = this.name;
-    this.selectedLastName = this.lastName;
+    this.selectedName = this.persona.name || '';
+    this.selectedLastName = this.persona.lastName || '';
+    this.selectedBirthDate = this.persona.birthDate || '';
+    this.selectedRelationship = this.persona.relationship || '';
   }
 
   onBirthDateChange(event: any) {
@@ -78,7 +78,7 @@ export class InsuredBusinessCardComponent implements OnInit  {
 
   emitCardData() {
     this.cardDataChange.emit({
-      idNumber: this.idNumber,
+      id: this.idNumber,
       birthDate: this.selectedBirthDate,
       relationship: this.selectedRelationship,
       name: this.selectedName,
@@ -93,13 +93,5 @@ export class InsuredBusinessCardComponent implements OnInit  {
   // Método que se llamará al hacer clic en el botón de acción
   triggerAction() {
     this.actionButtonTriggered.emit();
-  }
-
-  focus() {
-    const lastSwiperSlide = this.el.nativeElement.querySelector('swiper-slide:nth-last-of-type(1) ion-card');
-
-    if (lastSwiperSlide) {
-      lastSwiperSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
   }
 }
