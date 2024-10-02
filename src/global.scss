@@ -212,10 +212,10 @@ ion-popover.ion-no-border-radius{
 .custom-tooltip {
   position: relative;
   cursor: pointer;
-  display: inline-block; /* Asegura que el elemento tenga dimensiones */
 }
 
 .custom-tooltip::before {
+  display: inline-block; /* Asegura que el elemento tenga dimensiones */
   content: attr(data-tooltip);
   cursor: default;
   pointer-events: none;
