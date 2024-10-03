@@ -256,3 +256,9 @@ ion-popover.ion-no-border-radius{
   opacity: 1;
   visibility: visible;
 }
+
+@media (min-width: 1359px) {
+  .grid-fixed {
+      width: 1280px;
+  }
+}
