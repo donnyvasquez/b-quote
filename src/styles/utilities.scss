@@ -1,4 +1,5 @@
 /* src/styles/utilities.scss */
+@import './icons-utility/icons.scss';
 @import './order-utility/order-mix.scss';
 @include generate-order-utilities($breakpoints);
 
