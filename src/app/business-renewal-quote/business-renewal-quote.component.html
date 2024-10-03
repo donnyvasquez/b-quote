@@ -124,7 +124,7 @@
     <section *ngIf="disabledInsuredPeople.length > 0" class="renewal-disabled-insured--section ion-padding-bottom ion-margin-bottom">
       <h3 class="ion-margin-vertical">Dependiente(s) no incluido(s) en la cotización</h3>
       <app-renewal-insured-person
-        (togglePersonStatus)="toggleInsuredPerson($event)"
+        (togglePersonStatus)="confirmToggle(person)"
         *ngFor="let person of disabledInsuredPeople; let i = index"
         [insuredPersonData]="person"
         [index]="i"
@@ -157,5 +157,20 @@
   </ion-grid>
 <ion-toast #toast mode="ios" message="Hay cambios pendientes de guardar." duration="2000" color="medium" position="top" icon="information-circle-outline"></ion-toast>
 </ion-content>
-
+<ion-modal #modalSheet trigger="open-modal-sheet" class="modalSheet" mode="ios" [initialBreakpoint]="initialBreakpoint" [breakpoints]="breakpoints">
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-title>Eliminar asegurado</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="modalSheet.dismiss()" class="btn-toogle" aria-label="Cerrar formulario de confirmación"><ion-icon color="primary" size="large" aria-hidden="true" name="close-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <div class="ion-padding">
+      <p>Por favor recuerda que el valor aquí mostrado es para efecto de tu cotización, para eliminar un miembro de tú póliza debes solicitar un cambio de póliza</p>
+      <ion-button mode="ios" expand="block" (click)="confirmToggle(this.selectedPerson)">Confirmar</ion-button>
+    </div>
+  </ng-template>
+</ion-modal>
 <app-button-actions></app-button-actions>

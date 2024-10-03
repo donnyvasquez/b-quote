@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { BupaFieldOutputComponent } from "../bupa-field-output/bupa-field-output.component";
 import { InsuredPersonDetails, RenewalInsuredPersonComponent } from "../renewal-insured-person/renewal-insured-person.component";
 import { InsuredBusinessCardComponent } from "../insured-business-card/insured-business-card.component";
+import { DeviceDetectionService, DeviceType } from '../services/device-detection.service';
 
 @Component({
   selector: 'app-business-renewal-quote',
@@ -19,6 +20,7 @@ import { InsuredBusinessCardComponent } from "../insured-business-card/insured-b
 export class BusinessRenewalQuoteComponent implements OnInit {
   @ViewChild('modal', { static: true }) modal!: IonModal;
   @ViewChild('toast', { static: false }) toast!: IonToast;
+  @ViewChild('modalSheet', { static: true }) modalSheet!: IonModal;
   relationshipOptions = [
     { value: 'spouse', label: 'Spouse' }, // Esposo/a
     { value: 'child', label: 'Child' },   // Hijo/a
@@ -196,8 +198,40 @@ export class BusinessRenewalQuoteComponent implements OnInit {
   };
 
   presentingElement = document.querySelector('.main-content-renewal');
+  selectedPerson!: InsuredPersonDetails;
+  isMobile: boolean;
+  deviceType: DeviceType;
+  breakpoints!: number[] | undefined;
+  initialBreakpoint!: number | undefined;
+  modalSheetViewed: boolean =  false;
+
+  constructor(private deviceService: DeviceDetectionService) {
+    this.isMobile = this.deviceService.isMobile();
+    this.deviceType = this.deviceService.getDeviceType();
+  }
 
   ngOnInit() {
+    if (this.isMobile) {
+      console.log('Configurando comportamiento para dispositivo móvil: '+this.deviceType);
+      this.breakpoints=[0, 0.25];
+      this.initialBreakpoint=1;
+    }else{
+      this.breakpoints=undefined;
+      this.initialBreakpoint=undefined;
+    }
+
+    switch (this.deviceType) {
+      case DeviceType.Android:
+        console.log('Configurando para Android');
+        break;
+      case DeviceType.iOS:
+        console.log('Configurando para iOS');
+        break;
+      case DeviceType.Other:
+        console.log('Configurando para otro tipo de dispositivo');
+        break;
+    }
+
     this.filterInsuredPeople();
   }
 
@@ -256,13 +290,38 @@ export class BusinessRenewalQuoteComponent implements OnInit {
   }
 
   toggleInsuredPerson(person: InsuredPersonDetails) {
-    if (person && person.details) {
-      person.details.enabledInQuote = !person.details.enabledInQuote;
-      this.filterInsuredPeople();  // Actualiza las listas activas y desactivadas
-      this.checkForChangesAndSave(this.activeInsuredPeople,this.insuredPeople)
-    } else {
-      console.error('Invalid person object:', person);
+    // Guarda la persona seleccionada en `selectedPerson`
+    this.selectedPerson = person;
+
+    // Abre el modal inline si no se ha visto previamente
+    if (!this.modalSheetViewed) {
+      this.modalSheet.present();
+    }else{
+      this.confirmToggle(this.selectedPerson)
     }
+
+  }
+
+  // Método que se ejecuta al confirmar dentro del modal
+  confirmToggle(person: InsuredPersonDetails) {
+    this.modalSheetViewed = true;
+    this.selectedPerson = person;
+    // Asegúrate de que hay una persona seleccionada
+    if (this.selectedPerson && this.selectedPerson.details) {
+      // Alternar el estado de enabledInQuote de la persona seleccionada
+      this.selectedPerson.details.enabledInQuote = !this.selectedPerson.details.enabledInQuote;
+      this.filterInsuredPeople();  // Actualiza las listas activas y desactivadas
+      this.checkForChangesAndSave(this.activeInsuredPeople, this.insuredPeople);
+    } else {
+      console.error('Invalid person object:', this.selectedPerson);
+    }
+    // Cierra el modal
+    this.modalSheet.dismiss();
+  }
+
+  // Método para cerrar el modal sin aplicar cambios
+  cancelToggle() {
+    this.modalSheet.dismiss();
   }
 
   /*
