@@ -3,13 +3,18 @@
     <ion-col size="12" sizeMd="" class="ion-no-padding">
       <ion-row>
         <ion-col class="insured-people--title ion-no-padding-bottom ion-align-items-center ion-display-flex ion-justify-content-between">
-          <div class="ion-display-flex ion-align-items-center"><h3>{{ insuredPersonData.title }} <ion-badge class="" *ngIf="!insuredPersonData.details.inPolice">New</ion-badge></h3> <div *ngIf="insuredPersonData.details.isOverDate" class="is-over-date--message san-color-secondary-25 ion-display-flex ion-align-items-center ion-margin-start"><ion-icon size="large" name="information-circle-outline"></ion-icon> <p>Dependientes de 24 años deben adquirir su propia póliza.</p> </div></div>
+          <div class="ion-display-flex ion-align-items-center">
+            <h3>{{ insuredPersonData.title }} <ion-badge class="" *ngIf="!insuredPersonData.details.inPolice">New</ion-badge></h3>
+            <div *ngIf="insuredPersonData.details.isOverDate" class="is-over-date--message san-color-secondary-25 ion-display-flex ion-align-items-center">
+              <ion-icon size="large" name="information-circle-outline"></ion-icon>
+              <p>Dependiente de 24 años</p>
+            </div>
+          </div>
           <ng-container *ngIf="insuredPersonData.details.enabledInQuote; else restoreIcon">
             <ion-button data-tooltip-position="left" data-tooltip="Quitar de la cotización" *ngIf="!isTitular()" fill="outline" color="primary" shape="round" mode="ios" class="custom-tooltip renewal-insured-section--remove-insured ion-float-right" (click)="onToggleStatus()">
               <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
             </ion-button>
           </ng-container>
-
           <ng-template #restoreIcon>
             <ion-button *ngIf="!insuredPersonData.details.isOverDate" data-tooltip-position="left" data-tooltip="Incluir en la cotización" fill="outline" color="primary" shape="round" mode="ios" class="custom-tooltip renewal-insured-section--remove-insured ion-float-right" (click)="onToggleStatus()">
               <ion-icon slot="icon-only" name="swap-vertical-outline"></ion-icon>
@@ -33,12 +38,10 @@
       </ion-row>
     </ion-col>
     <ion-col size="12" class="ion-align-self-center" sizeMd="auto" *ngIf="insuredPersonData.details.isOverDate">
-      <ion-button expand="block" data-tooltip-position="left" data-tooltip-max-width="280px" data-tooltip="Para esta persona debes cotizar nueva póliza por llegar a la edad límite" style="--background:white" fill="outline" mode="ios" class="custom-tooltip renewal-insured-section--new-police" (click)="navigate('business-plans', 'renewal')">
+      <ion-button expand="block" style="--background:white" fill="outline" mode="ios" class="renewal-insured-section--new-police" (click)="navigate('business-plans', 'renewal')">
         Cotizar póliza
       </ion-button>
     </ion-col>
   </ion-row>
-
-
   <ion-item-divider></ion-item-divider>
 </article>

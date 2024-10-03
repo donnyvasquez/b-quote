@@ -5,8 +5,22 @@
     background-color: rgba(var(--ion-color-primary-rgb, 0, 84, 233), 0.08);
   }
   &--title{
+    .is-over-date--message{
+      @media (min-width:576px) {
+        margin-inline-start: 1rem;
+      }
+    }
     h3{
       font-size: 1.15rem;
+      align-self: flex-start;
+      margin-bottom: 0;
+    }
+    &>.ion-display-flex{
+      flex-direction: column;
+      justify-content: flex-start;
+        @media (min-width:576px) {
+          flex-direction: row;
+        }
     }
   }
   ion-item-divider{
