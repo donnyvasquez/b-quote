@@ -1,0 +1,63 @@
+<ion-content>
+  <section class="hero">
+    <ion-grid fixed="true">
+      <ion-row style="display:flex">
+        <ion-col size="auto">
+          <ion-avatar>
+            <img src="https://placehold.co/200x200" alt="Subcategoría" class="hero-image" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <h1>Biblioteca</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col
+        *ngFor="let audio of audioList"
+        size="12"
+        size-md="6"
+        size-lg="3"
+        [ngClass]="{'playing': audio.url === currentAudio.url}"
+      >
+        <div tabindex="0" class="audio-card" role="button"
+        (click)="playAudio(audio)" (keydown)="handleKeydown($event, audio)"
+        [attr.aria-pressed]="audio.url === currentAudio.url ? 'true' : 'false'">
+          <img [src]="audio.image" alt="{{audio.title}}" class="audio-image" />
+          <div class="audio-details">
+            <h3>{{ audio.title }}</h3>
+          </div>
+          <ion-icon
+            size="large"
+            [name]="audio.url === currentAudio.url
+                    ? (currentAudio.isPlaying ? 'pause-circle-outline' : 'play-circle-outline')
+                    : 'play-circle-outline'"
+            class="play-icon">
+          </ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+  {{ browserClass | json}}
+
+<ion-footer [class]="browserClass" mode="ios" *ngIf="currentAudio.url">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="footer-player">
+          <ion-img [src]="currentAudio.image" class="player-image"></ion-img>
+          <div class="player-info">
+            <h4>{{ currentAudio.title }}</h4>
+            <p>{{ currentAudio.category }}</p>
+          </div>
+          <audio #audioPlayer controls autoplay [src]="currentAudio.url"></audio>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'business-renewal-quote',
     loadComponent: () => import('./business-renewal-quote/business-renewal-quote.component').then((m) => m.BusinessRenewalQuoteComponent),
   },
+  {
+    path: 'audio-list',
+    loadComponent: () => import('./audio-list/audio-list.component').then((m) => m.AudioListComponent),
+  },
 ];
