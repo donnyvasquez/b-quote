@@ -62,8 +62,9 @@
       </ion-row>
       <ion-row class="ion-justify-content-center ion-nowrap ">
         <ion-col>
-          <swiper-container #swiper [mousewheel]="true" centeredSlides="auto" [grabCursor]="swiperConfig.grabCursor" [effect]="swiperConfig.effect" [slidesPerView]="swiperConfig.slidesPerView" [spaceBetween]="swiperConfig.spaceBetween" [loop]="swiperConfig.loop" [ngClass]="{'swiper-pager-active':swiperConfig.pagination, 'part-wraper-centered':insuredData.length < 3}">
-            <swiper-slide class="insured-data-slide" *ngFor="let persona of insuredData; let i = index">
+          <p>{{insuredData.length|json }}{{ insuredData.length<2}} - Centered: {{swiper.centeredSlides|json}}</p>
+          <swiper-container #swiper [mousewheel]="true" [centeredSlides]="false" [grabCursor]="swiperConfig.grabCursor" [effect]="swiperConfig.effect" [slidesPerView]="swiperConfig.slidesPerView" [spaceBetween]="swiperConfig.spaceBetween" [loop]="swiperConfig.loop" [ngClass]="{'swiper-pager-active':swiperConfig.pagination, 'part-wraper-centered':insuredData.length < 2}">
+            <swiper-slide *ngFor="let persona of insuredData; let i = index">
               <app-insured-business-card
                 [persona]="persona"
                 [idNumber]="i"

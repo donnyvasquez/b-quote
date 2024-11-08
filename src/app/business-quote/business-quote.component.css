@@ -1,0 +1,33 @@
+.insured-data-slide-titular {
+  display: inline-block;
+}
+
+.insured-data-slide-titular .insured-data-card-header {
+  background-color: #0079C8;
+}
+
+.insured-data-slide-titular ion-card-content {
+  background-color: #0D1846;
+}
+
+swiper-slide {
+  width: 296px;
+}
+
+swiper-slide:not(:first-child) .insured-data-card-header {
+  background-color: #0D1846;
+}
+
+swiper-slide:not(:first-child) ion-card-content {
+  background-color: #0079C8;
+}
+
+/*
+For Swiper container part wrapper (the commented section)
+
+swiper-container.part-wrapper-centered::part(wrapper) {
+  @media (min-width: 768px) {
+    justify-content: center;
+  }
+}
+*/

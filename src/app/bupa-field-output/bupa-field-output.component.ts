@@ -24,7 +24,7 @@ export class BupaFieldOutputComponent {
   @ViewChild('popover', { static: true }) popover!: IonPopover;
 
   constructor(private popoverController: PopoverController) { }
-  // Método que maneja los eventos de teclado
+  // MÃ©todo que maneja los eventos de teclado
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault(); // Evita el comportamiento por defecto de la barra espaciadora
@@ -35,7 +35,7 @@ export class BupaFieldOutputComponent {
   get isEmptyValue() {
     return this.value.every(val => !val.trim());
   }
-  // Método que programa el popover manualmente
+  // Mï¿½todo que programa el popover manualmente
   async showPopover(event: Event) {
     const popover = await this.popoverController.create({
       component: BupaFieldOutputComponent,

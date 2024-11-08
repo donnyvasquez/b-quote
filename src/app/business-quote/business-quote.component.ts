@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
 import { InsuranceScenariosService } from '../services/insurance-scenarios.service';
 import { InsuredBusinessCardComponent } from '../insured-business-card/insured-business-card.component';
 import Swiper from 'swiper';
+// import function to register Swiper custom elements
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
 
 interface InsuredData {
   id: number;
@@ -18,7 +22,7 @@ interface InsuredData {
 @Component({
   selector: 'app-business-quote',
   templateUrl: './business-quote.component.html',
-  styleUrls: ['./business-quote.component.scss'],
+  styleUrls: ['./business-quote.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule, StripHtmlPipe, IonicModule, InsuredBusinessCardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

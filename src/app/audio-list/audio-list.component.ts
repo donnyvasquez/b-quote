@@ -1,17 +1,17 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'; // Cambiado "viewChild" a "ViewChild"
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { BrowserType, DeviceDetectionService } from '../services/device-detection.service';
 
 @Component({
-  selector: 'app-audio-list', // Actualiza el selector
-  templateUrl: './audio-list.component.html', // Asegúrate de actualizar también el nombre del archivo si lo cambias
+  selector: 'app-audio-list',
+  templateUrl: './audio-list.component.html',
   styleUrls: ['./audio-list.component.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule]
 })
-export class AudioListComponent {
-  browserClass!: string;
+export class AudioListComponent implements OnInit {
+  browserClass!: string; // Se inicializa la variable browserClass
   constructor(private deviceDetectionService: DeviceDetectionService) {}
 
   @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef<HTMLAudioElement>;
@@ -90,7 +90,6 @@ export class AudioListComponent {
   ];
 
   currentAudio = { title: '', image: '', url: '', category: '', isPlaying: false };
-
   audioPlaying!: boolean;
   ngOnInit(): void {
     const browser = this.deviceDetectionService.getBrowserType();
@@ -137,8 +136,6 @@ export class AudioListComponent {
       }
     }
   }
-
-
   handleKeydown(event: KeyboardEvent, audio: any) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault(); // Evitar que la página se desplace cuando se presiona espacio

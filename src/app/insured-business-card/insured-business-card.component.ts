@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, OnInit, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import { DeviceDetectionService, DeviceType } from '../services/device-detection.service';
 @Component({
   selector: 'app-insured-business-card',
   templateUrl: './insured-business-card.component.html',
@@ -31,8 +31,13 @@ export class InsuredBusinessCardComponent implements OnInit  {
   selectedRelationship: string = '';
   selectedName: string = '';
   selectedLastName: string = '';
+  isMobile: boolean;
+  deviceType: DeviceType;
 
-  constructor() {}
+  constructor(private deviceService: DeviceDetectionService) {
+    this.isMobile = this.deviceService.isMobile();
+    this.deviceType = this.deviceService.getDeviceType();
+  }
 
   ngOnInit() {
     this.selectedName = this.persona.name || '';

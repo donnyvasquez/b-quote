@@ -1,23 +1,39 @@
+ion-header{
+  box-shadow: none;
+}
+.renewal-background-header{
+  padding-inline: 0;
+  .renewal-toolbar{
+    --background	: transparent;
+  }ion-title {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 32px;
+    text-align: left;
+    color: #0D1846;
+
+  }
+}
 .hero {
-  margin-bottom: 20px;
-  background-color: lightblue;
-
+  .hero-column-avatar, .hero-column-description{
+    align-self: center;
+  }
   .hero-image {
-    width: 220px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 900px;
   }
-
-  h1 {
-    font-size: 24px;
-    margin: 0;
-    color: #1e1e1e;
-  }
-
   p {
-    font-size: 16px;
-    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: left;
   }
+}
+h3{
+font-size: 22px;
+font-weight: 600;
+line-height: 17.6px;
 }
 .playing .audio-card{
   box-shadow: 0 0 0px 3px rgba(91, 110, 255, 0.5);
@@ -85,8 +101,9 @@
 
   .player-image {
     width: 96px;
-    height: 96px;
+    height: auto;
     border-radius: 8px;
+    overflow: hidden;
   }
 
   .player-info {
@@ -105,7 +122,17 @@
   }
 
   audio {
-    width: 100%;
+    flex-grow: 3;
     margin-top: 10px;
   }
 }
+
+.audio-firefox .footer-player {
+  background-color: #191919;
+  color: silver;
+}
+
+.audio-safari .footer-player {
+  background-color: #3a3a3a;
+  color: silver;
+  }

@@ -1,0 +1,73 @@
+.care-your-mind-title{
+font-size: 26px;
+font-weight: 500;
+line-height: 32px;
+color: #0D1846;
+}
+.care-mind-category-row{
+  background-color: #F2F5F7;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  ion-col h2{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+ion-card {
+  width: 200px;
+  cursor: pointer;
+  border-radius: 8px;
+  ion-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: left;
+  }
+  transition: all 0.25s ease-in-out;
+  &:focus, &:hover {
+    box-shadow: 0 0 0px 3px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+}
+
+::ng-deep swiper-container{
+  &::part(button-next), &::part(button-prev) {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+    &:hover{
+      &::part(button-next), &::part(button-prev) {
+      visibility: visible;
+
+      }
+    }
+
+  /* Cambiar el estilo de los botones al hacer hover */
+  &::part(button-next):hover, &::part(button-prev):hover {
+    background-color: rgba(0, 0, 0, 0.8);  /* Más oscuro al hacer hover */
+  }
+
+  /* Estilos para ocultar los botones en pantallas pequeñas */
+  @media (max-width: 768px) {
+    &::part(button-next), &::part(button-prev) {
+      display: none;  /* Ocultar los botones en pantallas pequeñas */
+    }
+  }
+}
+swiper-slide {
+  width: auto;  /* Asegura que el ancho del slide sea flexible */
+}
+
+ .swiper-button-next, .swiper-button-prev {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+}

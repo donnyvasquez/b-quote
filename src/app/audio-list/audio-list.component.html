@@ -1,21 +1,34 @@
+<ion-header mode="md">
+  <ion-grid fixed="true" class="custom-fixed-grid renewal-background-header bupa-padding-0">
+    <ion-toolbar class="renewal-toolbar">
+      <!-- Botón de volver alineado a la izquierda -->
+      <ion-buttons slot="start">
+        <ion-back-button color="primary" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Categoría tal
+      </ion-title>
+    </ion-toolbar>
+  </ion-grid>
+</ion-header>
 <ion-content>
   <section class="hero">
-    <ion-grid fixed="true">
+    <ion-grid fixed="true" class="custom-fixed-grid">
       <ion-row style="display:flex">
-        <ion-col size="auto">
-          <ion-avatar>
-            <img src="https://placehold.co/200x200" alt="Subcategoría" class="hero-image" />
-          </ion-avatar>
+        <ion-col class="hero-column-avatar" size="12" sizeSm="auto">
+          <img src="https://placehold.co/200x200" alt="Subcategoría" class="hero-image" />
         </ion-col>
-        <ion-col>
-          <h1>Biblioteca</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <ion-col class="hero-column-description" size="12" sizeSm="">
+        <p>Cuando hablamos de tener una dieta saludable, hablamos de aquella que nos aporta todos los alimentos necesarios para cubrir nuestras necesidades nutricionales, esto no significa tener que llevar una dieta baja en calorías, significa comer todo tipo de alimentos, en su justa medida. Según en la etapa de la vida en la que nos encontremos y el estilo de vida que llevemos, nuestras necesidades nutricionales serán distintas.
+        </p>
+        <p>En ocasiones, por nuestro estilo de vida, pensamos que es más complicado mantener una dieta saludable y equilibrada, en esta sección encontrarás contenidos que te ayudarán a mantener una dieta equilibrada tanto en casa como fuera de ella.</p>
         </ion-col>
       </ion-row>
     </ion-grid>
   </section>
 
-  <ion-grid fixed="true">
+  <ion-grid fixed="true" class="custom-fixed-grid">
+    <h3>Listado de reproducción</h3>
     <ion-row>
       <ion-col
         *ngFor="let audio of audioList"
@@ -43,17 +56,16 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-  {{ browserClass | json}}
 
 <ion-footer [class]="browserClass" mode="ios" *ngIf="currentAudio.url">
-  <ion-grid>
+  <ion-grid class="custom-fixed-grid">
     <ion-row>
       <ion-col>
         <div class="footer-player">
           <ion-img [src]="currentAudio.image" class="player-image"></ion-img>
           <div class="player-info">
             <h4>{{ currentAudio.title }}</h4>
-            <p>{{ currentAudio.category }}</p>
+            <p hidden>{{ currentAudio.category }}</p>
           </div>
           <audio #audioPlayer controls autoplay [src]="currentAudio.url"></audio>
         </div>

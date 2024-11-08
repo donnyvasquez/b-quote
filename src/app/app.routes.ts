@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'cuida-tu-mente',
     pathMatch: 'full',
   },
   {
@@ -25,5 +25,9 @@ export const routes: Routes = [
   {
     path: 'audio-list',
     loadComponent: () => import('./audio-list/audio-list.component').then((m) => m.AudioListComponent),
+  },
+  {
+    path: 'cuida-tu-mente',
+    loadComponent: () => import('./cuida-tu-mente/cuida-tu-mente.component').then((m) => m.CuidaTuMenteComponent),
   },
 ];

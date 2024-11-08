@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-grid class="custom-fixed-grid">
+    <h2 class="care-your-mind-title">Biblioteca</h2>
+    <p>Como parte de tu Programa de Salud Mente Sana, te ofrecemos terapias digitales relacionadas que sabemos pueden ser de ayuda:</p>
+
+    <!-- Itera sobre el arreglo de categorías con tarjetas -->
+    <ion-row *ngFor="let item of data" class="ion-padding care-mind-category-row">
+      <ion-col size="12"><h2>{{ item.categoria }}</h2></ion-col>
+      <ion-col>
+        <swiper-container #swiper [navigation]="swiperConfig.navigation" mousewheel="true" [centeredSlides]="false" [grabCursor]="swiperConfig.grabCursor" [effect]="swiperConfig.effect" [slidesPerView]="swiperConfig.slidesPerView" [spaceBetween]="swiperConfig.spaceBetween" [loop]="swiperConfig.loop">
+
+          <!-- Itera sobre las tarjetas dentro de cada categoría -->
+          <swiper-slide *ngFor="let tarjeta of item.tarjetas">
+            <ion-card (click)="navigateToAudioList()" (keydown)="handleKeydown($event)" tabindex="0" role="button">
+              <img alt="Imagen de {{tarjeta}}" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+              <ion-card-header>
+                <ion-card-title>{{ tarjeta }}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </swiper-slide>
+
+        </swiper-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
